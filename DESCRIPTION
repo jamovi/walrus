@@ -1,0 +1,11 @@
+Package: walrus
+Type: Package
+Title: Robust Statistical Methods
+Version: 0.2.0
+Author: Who wrote it
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: Robust statistical methods FTW!
+License: GPL3
+Encoding: UTF-8
+LazyData: true
+Imports: jmvcore (>= 0.4.0), R6, WRS2

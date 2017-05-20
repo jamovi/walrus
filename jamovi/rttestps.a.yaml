@@ -1,0 +1,67 @@
+---
+name: rttestPS
+title: Robust Paired Samples T-Test
+menuGroup: walrus
+menuSubgroup: T-Tests
+version: '1.0.0'
+jas: '1.1'
+
+description:
+    main: Robust Paired Samples T-Test
+    R:
+        usage: |
+            rttestPS(data,
+                pairs = list(
+                    list(i1 = 'x', i2 = 'y')))
+
+completeWhenFilled: true
+
+options:
+    - name: data
+      type: Data
+      description:
+          R: the data as a data frame
+
+    - name: pairs
+      title: Paired Variables
+      type: Pairs
+      suggested:
+        - continuous
+      permitted:
+        - continuous
+        - nominal
+        - ordinal
+      description:
+          R: a list of lists specifying the pairs of measurement in `data`
+
+    - name: tr
+      title: Trim proportion (γ)
+      type: Number
+      min: 0
+      max: 0.5
+      default: 0.2
+
+    - name: md
+      title: Mean difference
+      type: Bool
+      default: false
+      description:
+          R: >
+            `TRUE` or `FALSE` (default), provide means and standard errors
+
+    - name: es
+      title: Effect size
+      type: Bool
+      default: false
+      description:
+          R: >
+            `TRUE` or `FALSE` (default), provide effect sizes
+
+    - name: ci
+      title: Confidence interval
+      type: Bool
+      default: false
+      description:
+          R: >
+            `TRUE` or `FALSE` (default), provide confidence intervals
+...

@@ -1,0 +1,53 @@
+name: rttestPS
+title: Paired Samples T-Test
+jus: '2.0'
+children:
+  - type: VariableSupplier
+    suggested:
+      - continuous
+    permitted:
+      - continuous
+      - nominal
+      - ordinal
+    persistentItems: true
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        label: Paired Variables
+        children:
+          - type: VariablesListBox
+            name: pairs
+            showColumnHeaders: false
+            fullRowSelect: true
+            itemDropBehaviour: overwrite
+            columns:
+              - name: i1
+                label: null
+                stretchFactor: 1
+                template:
+                  type: VariableLabel
+                  format: variable
+              - name: i2
+                label: null
+                stretchFactor: 1
+                template:
+                  type: VariableLabel
+                  format: variable
+            isTarget: true
+  - type: LayoutBox
+    margin: large
+    children:
+      - name: tr
+        type: TextBox
+        label: Trim proportion
+        format: number
+        inputPattern: '[0-9]+'
+      - name: md
+        type: CheckBox
+        label: Mean difference
+      - name: ci
+        type: CheckBox
+        label: Confidence interval
+      - name: es
+        type: CheckBox
+        label: Effect size

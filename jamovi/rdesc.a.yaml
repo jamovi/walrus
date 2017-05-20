@@ -1,0 +1,65 @@
+---
+name:  rdesc
+title: Robust Descriptives
+menuGroup: walrus
+version: '1.0.0'
+jas: '1.1'
+
+options:
+    - name: data
+      type: Data
+
+    - name: vars
+      title: Variables
+      type: Variables
+      suggested:
+        - continuous
+      permitted:
+        - continuous
+        - nominal
+        - ordinal
+    
+    - name: mean
+      title: Vanilla mean
+      type: Bool
+      default: true
+    
+    - name: trim
+      title: Trimmed mean
+      type: Bool
+      default: true
+
+    - name: tr
+      title: Trim proportion
+      type: Number
+      default: 0.2
+      min: 0
+      max: .5
+      
+    - name: win
+      title: Winsorized mean
+      type: Bool
+      default: false
+      
+    - name: wl
+      title: Winsorizing level
+      type: Number
+      default: 0.2
+      min: 0
+      max: .5
+    
+    - name: mest
+      title: M-estimator
+      type: Bool
+      default: false
+    
+    - name: bend
+      title: Bending constant
+      type: Number
+      default: 1.28
+      
+    - name: med
+      title: Median
+      type: Bool
+      default: false
+...

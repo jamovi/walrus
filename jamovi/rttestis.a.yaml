@@ -1,0 +1,81 @@
+---
+name:  rttestIS
+title: Robust Independent Samples T-Test
+menuGroup: walrus
+version: '1.0.0'
+jas: '1.1'
+
+completeWhenFilled: true
+
+options:
+    - name: data
+      type: Data
+
+    - name: deps
+      title: Dependent Variables
+      type: Variables
+
+    - name: group
+      title: Grouping Variable
+      type: Variable
+
+    - name: yuen
+      title: Yuen's
+      type: Bool
+      default: TRUE
+
+    - name: tr
+      title: Trim proportion
+      type: Number
+      default: 0.2
+      min: 0
+      max: 0.5
+
+    - name: mest
+      title: M-estimator
+      type: Bool
+      default: FALSE
+
+    - name: method
+      title: Method
+      type: List
+      options:
+        - name: onestep
+          title: One-step
+        - name: mom
+          title: Modified one-step
+        - name: median
+          title: Median
+        - name: mean
+          title: Mean
+      default: mom
+
+    - name: yuenbt
+      title: Bootstrap
+      type: Bool
+      default: FALSE
+
+    - name: nboot
+      title: Samples
+      type: Integer
+      min: 0
+      default: 599
+
+    - name: md
+      title: Mean difference
+      type: Bool
+      default: false
+
+    - name: ci
+      title: Confidence interval
+      type: Bool
+      default: false
+
+    - name: es
+      title: Effect-size
+      type: Bool
+
+    - name: esci
+      title: Confidence interval
+      type: Bool
+...

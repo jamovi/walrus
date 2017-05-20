@@ -1,0 +1,75 @@
+---
+name:  rdesc
+title: Robust Descriptives
+jrs:   "1.1"
+
+items:
+    - name:  table
+      title: Robust Descriptives
+      type:  Table
+      rows: (vars)
+      clearWith:
+        - tr
+        - wl
+        - bend
+      columns:
+        - name: var
+          title: ''
+          type: text
+          content: ($key)
+        - name: s[m]
+          title: ''
+          type: text
+          content: Mean
+          visible: (mean)
+        - name: m[m]
+          title: ''
+          visible: (mean)
+        - name: se[m]
+          title: SE
+          visible: (mean)
+        - name: s[tr]
+          title: ''
+          type: text
+          content: Trimmed mean
+          visible: (trim)
+        - name: m[tr]
+          title: ''
+          visible: (trim)
+        - name: se[tr]
+          title: SE
+          visible: (trim)
+        - name: s[w]
+          title: ''
+          type: text
+          content: Winsorized mean
+          visible: (win)
+        - name: m[w]
+          title: ''
+          visible: (win)
+        - name: se[w]
+          title: SE
+          visible: (win)
+        - name: s[est]
+          title: ''
+          type: text
+          content: M-estimator
+          visible: (mest)
+        - name: m[est]
+          title: ''
+          visible: (mest)
+        - name: se[est]
+          title: SE
+          visible: (mest)
+        - name: s[med]
+          title: ''
+          type: text
+          content: Median
+          visible: (med)
+        - name: m[med]
+          title: ''
+          visible: (med)
+        - name: se[med]
+          title: SE
+          visible: (med)
+...

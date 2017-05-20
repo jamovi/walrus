@@ -1,0 +1,89 @@
+title: Robust ANOVA
+name: rAnova
+jus: '2.0'
+stage: 0
+children:
+  - type: VariableSupplier
+    persistentItems: false
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        label: Dependent
+        children:
+          - type: VariablesListBox
+            name: dep
+            maxItemCount: 1
+            showColumnHeaders: false
+            fullRowSelect: true
+            columns:
+              - name: column1
+                label: ''
+                stretchFactor: 1
+                template:
+                  type: VariableLabel
+            isTarget: true
+      - type: TargetLayoutBox
+        label: Factors
+        children:
+          - type: VariablesListBox
+            name: factors
+            showColumnHeaders: false
+            fullRowSelect: true
+            columns:
+              - name: column1
+                label: ''
+                stretchFactor: 1
+                template:
+                  type: VariableLabel
+            isTarget: true
+  - type: Label
+    label: Method
+    margin: large
+    children:
+      - type: RadioButton
+        name: method_median
+        optionName: method
+        optionPart: median
+        label: Median
+      - type: RadioButton
+        name: method_trim
+        optionName: method
+        optionPart: trim
+        label: Trim
+        children:
+          - name: tr
+            type: TextBox
+            label: Trim proportion
+            format: number
+            inputPattern: '[0-9]+'
+            enable: '(method:trim)'
+      - type: RadioButton
+        name: method_boot
+        optionName: method
+        optionPart: boot
+        label: Bootstrap
+        children:
+          - name: est
+            type: ComboBox
+            label: Estimator
+            enable: '(method:boot)'
+          - name: nboot
+            type: TextBox
+            label: Samples
+            format: number
+            inputPattern: '[0-9]+'
+            enable: '(method:boot)'
+          - name: dist
+            type: ComboBox
+            label: Distances
+            enable: '(method:boot)'
+  - type: Label
+    label: Additional Statistics
+    cell:
+      column: 1
+      row: 1
+    margin: large
+    children:
+      - name: ph
+        type: CheckBox
+        label: Post hoc tests

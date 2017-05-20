@@ -1,0 +1,123 @@
+---
+name:  rttestIS
+title: Robust Independent Samples T-Test
+jrs:   "1.1"
+
+items:
+    - name:  ttest
+      title: Robust Independent Samples T-Test
+      type:  Table
+      rows: (deps)
+      clearWith:
+        - group
+        - method
+        - tr
+        - nboot
+
+      columns:
+        - name: var
+          title: ''
+          type: text
+          content: ($key)
+
+        - name: test[yuen]
+          title: ''
+          type: text
+          content: Yuen's test
+          visible: (yuen)
+
+        - name: t[yuen]
+          title: t
+          type: number
+          visible: (yuen)
+
+        - name: df[yuen]
+          title: df
+          type: number
+          visible: (yuen)
+
+        - name: p[yuen]
+          title: p
+          type: number
+          format: zto,pvalue
+          visible: (yuen)
+
+        - name: md[yuen]
+          title: Mean diff
+          type: number
+          visible: (yuen && md)
+
+        - name: cil[yuen]
+          superTitle: '95% Confidence Interval'
+          title: Lower
+          type: number
+          visible: (yuen && ci)
+
+        - name: ciu[yuen]
+          superTitle: '95% Confidence Interval'
+          title: Upper
+          type: number
+          visible: (yuen && ci)
+
+        - name: es[yuen]
+          title: ξ
+          type: number
+          visible: (yuen && es)
+
+        - name: escil[yuen]
+          superTitle: '95% ξ Confidence Interval'
+          title: Lower
+          type: number
+          visible: (yuen && esci)
+
+        - name: esciu[yuen]
+          superTitle: '95% ξ Confidence Interval'
+          title: Upper
+          type: number
+          visible: (yuen && esci)
+
+        - name: test[yuenbt]
+          title: ''
+          type: text
+          content: Yuen's bootstrapped
+          visible: (yuen && yuenbt)
+
+        - name: t[yuenbt]
+          title: t
+          type: number
+          visible: (yuen && yuenbt)
+
+        - name: df[yuenbt]
+          title: df
+          type: number
+          visible: (yuen && yuenbt)
+
+        - name: p[yuenbt]
+          title: p
+          type: number
+          format: zto,pvalue
+          visible: (yuen && yuenbt)
+
+        - name: test[mest]
+          title: ''
+          type: text
+          content: M-estimator
+          visible: (mest)
+
+        - name: t[mest]
+          title: t
+          type: number
+          visible: (mest)
+
+        - name: df[mest]
+          title: df
+          type: number
+          visible: (mest)
+
+        - name: p[mest]
+          title: p
+          type: number
+          format: zto,pvalue
+          visible: (mest)
+
+...

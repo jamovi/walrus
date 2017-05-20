@@ -1,0 +1,96 @@
+---
+name: rAnova
+title: Robust ANOVA
+menuGroup: walrus
+menuSubgroup: ANOVAs
+version: '1.0.0'
+jas: '1.1'
+
+description:
+    main: Robust Analysis of Variance
+    R:
+        usage: |
+            rAnova(ToothGrowth,
+                dep='len',
+                factors=c('dose', 'supp'))
+
+completeWhenFilled: true
+
+options:
+    - name: data
+      type: Data
+      description:
+          R: the data as a data frame
+
+    - name: dep
+      title: Dependent
+      type: Variable
+      suggested:
+        - continuous
+      permitted:
+        - continuous
+        - nominal
+        - ordinal
+      description:
+          R: >
+            a string naming the dependent variable from `data`, variable
+            must be numeric
+
+    - name: factors
+      title: Factors
+      type: Variables
+      suggested:
+        - nominal
+        - ordinal
+      default:
+      description:
+          R: a vector of strings naming the fixed factors from `data`
+
+    - name: method
+      title: Method
+      type: List
+      options:
+        - median
+        - trim
+        - boot
+      default:
+        trim
+
+    - name: ph
+      title: Post hoc tests
+      type: Bool
+
+    - name: tr
+      title: Trim proportion
+      type: Number
+      min: 0
+      max: 0.5
+      default: 0.2
+
+    - name: est
+      title: Estimator
+      type: List
+      options:
+        - title: One-step
+          name: onestep
+        - name: mom
+          title: Modified one-step
+        - name: median
+          title: Median
+      default: mom
+
+    - name: nboot
+      title: Samples
+      type: Integer
+      min: 0
+      default: 599
+
+    - name: dist
+      title: Distances
+      type: List
+      options:
+        - name: maha
+          title: Mahalanobis
+        - name: proj
+          title: Projection
+      default: proj

@@ -1,0 +1,87 @@
+title: Robust Independent Samples T-Test
+name: rttestIS
+jus: '2.0'
+stage: 0
+children:
+  - type: VariableSupplier
+    persistentItems: false
+    stretchFactor: 1
+    children:
+      - type: TargetLayoutBox
+        label: Dependent Variables
+        children:
+          - type: VariablesListBox
+            name: deps
+            showColumnHeaders: false
+            fullRowSelect: true
+            columns:
+              - name: column1
+                label: ''
+                stretchFactor: 1
+                template:
+                  type: VariableLabel
+            isTarget: true
+      - type: TargetLayoutBox
+        label: Grouping Variable
+        children:
+          - type: VariablesListBox
+            name: group
+            maxItemCount: 1
+            showColumnHeaders: false
+            fullRowSelect: true
+            columns:
+              - name: column1
+                label: ''
+                stretchFactor: 1
+                template:
+                  type: VariableLabel
+            isTarget: true
+  - type: Label
+    label: Yuen's
+    stretchFactor: 1
+    children:
+      - type: CheckBox
+        name: yuen
+        label: Yuen's
+        children:
+          - name: tr
+            type: TextBox
+            label: Trim proportion
+            format: number
+            inputPattern: '[0-9]+'
+          - type: CheckBox
+            name: yuenbt
+            label: Bootstrap
+            children:
+              - type: TextBox
+                name: nboot
+                label: Samples
+                format: number
+                inputPattern: '[0-9]+'
+          - name: md
+            type: CheckBox
+            label: Mean difference
+          - name: ci
+            type: CheckBox
+            label: Confidence interval
+          - name: es
+            type: CheckBox
+            label: Effect-size
+            children:
+              - name: esci
+                type: CheckBox
+                label: Confidence interval
+  - type: Label
+    label: M-estimator
+    cell:
+      row: 1
+      column: 1
+    stretchFactor: 1
+    children:
+      - type: CheckBox
+        name: mest
+        label: M-estimator
+        children:
+          - name: method
+            type: ComboBox
+            label: Method

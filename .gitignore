@@ -1,0 +1,7 @@
+
+.Rbuildignore
+.Rproj.user
+
+build
+
+*.jmo

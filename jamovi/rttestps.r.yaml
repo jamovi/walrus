@@ -1,0 +1,55 @@
+---
+name: rttestPS
+title: Robust Paired Samples T-Test
+jrs: '1.1'
+
+items:
+    - name: ttest
+      title: Robust Paired Samples T-Test
+      type: Table
+      rows: (pairs)
+      clearWith:
+        - tr
+
+      columns:
+        - name: var1
+          title: ""
+          type: text
+
+        - name: var2
+          title: ""
+          type: text
+
+        - name: t
+          title: t
+
+        - name: df
+          title: df
+          type: number
+
+        - name: p
+          title: p
+          type: number
+          format: zto,pvalue
+
+        - name: md
+          title: Mean difference
+          visible: (md)
+
+        - name: se
+          title: SE
+          visible: (md)
+
+        - name: cil
+          title: Lower
+          superTitle: 95% Confidence Interval
+          visible: (ci)
+
+        - name: ciu
+          title: Upper
+          superTitle: 95% Confidence Interval
+          visible: (ci)
+
+        - name: es
+          title: Cohen's d
+          visible: (es)
