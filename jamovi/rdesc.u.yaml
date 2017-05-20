@@ -11,6 +11,7 @@ children:
     permitted:
       - continuous
       - nominal
+      - nominaltext
       - ordinal
     children:
       - type: TargetLayoutBox
@@ -18,6 +19,7 @@ children:
         children:
           - type: VariablesListBox
             name: vars
+            height: normal
             showColumnHeaders: false
             fullRowSelect: true
             columns:
@@ -26,6 +28,13 @@ children:
                 stretchFactor: 1
                 template:
                   type: VariableLabel
+            isTarget: true
+      - type: TargetLayoutBox
+        label: Split by
+        children:
+          - type: VariablesListBox
+            name: splitBy
+            maxItemCount: 1
             isTarget: true
   - type: LayoutBox
     margin: large

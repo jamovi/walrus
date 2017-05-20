@@ -1,0 +1,46 @@
+---
+name:  rplots
+title: Box & Violin Plots
+menuGroup: walrus
+version: '1.0.0'
+jas: '1.1'
+
+options:
+    - name: data
+      type: Data
+
+    - name: vars
+      title: Variables
+      type: Variables
+      suggested:
+        - continuous
+      permitted:
+        - continuous
+        - nominal
+        - ordinal
+        
+    - name: splitBy
+      title: Split by
+      type: Variable
+      suggested:
+        - nominal
+      permitted:
+        - nominal
+        - ordinal
+        - nominaltext
+
+    - name: violin
+      title: Violin
+      type: Bool
+      default: true
+      
+    - name: boxplot
+      title: Boxplot
+      type: Bool
+      default: true
+
+    - name: jitter
+      title: Data
+      type: Bool
+      default: false
+...

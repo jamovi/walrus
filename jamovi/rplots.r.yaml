@@ -1,0 +1,21 @@
+---
+name:  rplots
+title: Box & Violin Plots
+jrs:   '1.1'
+
+items:
+    - name: plots
+      title: Plots
+      type: Array
+      items: (vars)
+      template:
+          title: $key
+          type: Image
+          renderFun: .plot
+          clearWith:
+            - splitBy
+            - violin
+            - boxplot
+            - jitter
+
+...

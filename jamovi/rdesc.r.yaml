@@ -7,16 +7,20 @@ items:
     - name:  table
       title: Robust Descriptives
       type:  Table
-      rows: (vars)
       clearWith:
         - tr
         - wl
         - bend
+        - splitBy
       columns:
         - name: var
           title: ''
           type: text
-          content: ($key)
+          combineBelow: true
+        - name: level
+          title: ''
+          type: text
+          visible: (splitBy)
         - name: s[m]
           title: ''
           type: text

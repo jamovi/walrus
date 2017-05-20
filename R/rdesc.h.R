@@ -9,6 +9,7 @@ rdescOptions <- R6::R6Class(
     public = list(
         initialize = function(
             vars = NULL,
+            splitBy = NULL,
             mean = TRUE,
             trim = TRUE,
             tr = 0.2,
@@ -33,6 +34,15 @@ rdescOptions <- R6::R6Class(
                     "continuous",
                     "nominal",
                     "ordinal"))
+            private$..splitBy <- jmvcore::OptionVariable$new(
+                "splitBy",
+                splitBy,
+                suggested=list(
+                    "nominal"),
+                permitted=list(
+                    "nominal",
+                    "ordinal",
+                    "nominaltext"))
             private$..mean <- jmvcore::OptionBool$new(
                 "mean",
                 mean,
@@ -71,6 +81,7 @@ rdescOptions <- R6::R6Class(
                 default=FALSE)
         
             self$.addOption(private$..vars)
+            self$.addOption(private$..splitBy)
             self$.addOption(private$..mean)
             self$.addOption(private$..trim)
             self$.addOption(private$..tr)
@@ -82,6 +93,7 @@ rdescOptions <- R6::R6Class(
         }),
     active = list(
         vars = function() private$..vars$value,
+        splitBy = function() private$..splitBy$value,
         mean = function() private$..mean$value,
         trim = function() private$..trim$value,
         tr = function() private$..tr$value,
@@ -92,6 +104,7 @@ rdescOptions <- R6::R6Class(
         med = function() private$..med$value),
     private = list(
         ..vars = NA,
+        ..splitBy = NA,
         ..mean = NA,
         ..trim = NA,
         ..tr = NA,
@@ -117,13 +130,14 @@ rdescResults <- R6::R6Class(
                 options=options,
                 name="table",
                 title="Robust Descriptives",
-                rows="(vars)",
                 clearWith=list(
                     "tr",
                     "wl",
-                    "bend"),
+                    "bend",
+                    "splitBy"),
                 columns=list(
-                    list(`name`="var", `title`="", `type`="text", `content`="($key)"),
+                    list(`name`="var", `title`="", `type`="text", `combineBelow`=TRUE),
+                    list(`name`="level", `title`="", `type`="text", `visible`="(splitBy)"),
                     list(`name`="s[m]", `title`="", `type`="text", `content`="Mean", `visible`="(mean)"),
                     list(`name`="m[m]", `title`="", `visible`="(mean)"),
                     list(`name`="se[m]", `title`="SE", `visible`="(mean)"),
@@ -167,6 +181,7 @@ rdescBase <- R6::R6Class(
 #' 
 #' @param data .
 #' @param vars .
+#' @param splitBy .
 #' @param mean .
 #' @param trim .
 #' @param tr .
@@ -179,6 +194,7 @@ rdescBase <- R6::R6Class(
 rdesc <- function(
     data,
     vars,
+    splitBy,
     mean = TRUE,
     trim = TRUE,
     tr = 0.2,
@@ -190,6 +206,7 @@ rdesc <- function(
 
     options <- rdescOptions$new(
         vars = vars,
+        splitBy = splitBy,
         mean = mean,
         trim = trim,
         tr = tr,

@@ -18,6 +18,16 @@ options:
         - continuous
         - nominal
         - ordinal
+        
+    - name: splitBy
+      title: Split by
+      type: Variable
+      suggested:
+        - nominal
+      permitted:
+        - nominal
+        - ordinal
+        - nominaltext
     
     - name: mean
       title: Vanilla mean

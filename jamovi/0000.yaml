@@ -18,6 +18,11 @@ description: >-
   href="https://www.amazon.com/Introduction-Estimation-Hypothesis-Statistical-Modeling/dp/012804733X">
   Introduction to Robust Estimation & Hypothesis Testing</a>.
 analyses:
+  - title: Box & Violin Plots
+    name: rplots
+    ns: walrus
+    menuGroup: walrus
+    menuTitle: Box & Violin Plots
   - title: Robust Descriptives
     name: rdesc
     ns: walrus
