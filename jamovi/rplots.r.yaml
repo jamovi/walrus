@@ -16,6 +16,7 @@ items:
             - splitBy
             - violin
             - boxplot
-            - jitter
+            - dot
+            - dotType
 
 ...

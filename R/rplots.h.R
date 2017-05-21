@@ -12,7 +12,8 @@ rplotsOptions <- R6::R6Class(
             splitBy = NULL,
             violin = TRUE,
             boxplot = TRUE,
-            jitter = FALSE, ...) {
+            dot = FALSE,
+            dotType = "jitter", ...) {
 
             super$initialize(
                 package='walrus',
@@ -46,29 +47,39 @@ rplotsOptions <- R6::R6Class(
                 "boxplot",
                 boxplot,
                 default=TRUE)
-            private$..jitter <- jmvcore::OptionBool$new(
-                "jitter",
-                jitter,
+            private$..dot <- jmvcore::OptionBool$new(
+                "dot",
+                dot,
                 default=FALSE)
+            private$..dotType <- jmvcore::OptionList$new(
+                "dotType",
+                dotType,
+                options=list(
+                    "jitter",
+                    "stack"),
+                default="jitter")
         
             self$.addOption(private$..vars)
             self$.addOption(private$..splitBy)
             self$.addOption(private$..violin)
             self$.addOption(private$..boxplot)
-            self$.addOption(private$..jitter)
+            self$.addOption(private$..dot)
+            self$.addOption(private$..dotType)
         }),
     active = list(
         vars = function() private$..vars$value,
         splitBy = function() private$..splitBy$value,
         violin = function() private$..violin$value,
         boxplot = function() private$..boxplot$value,
-        jitter = function() private$..jitter$value),
+        dot = function() private$..dot$value,
+        dotType = function() private$..dotType$value),
     private = list(
         ..vars = NA,
         ..splitBy = NA,
         ..violin = NA,
         ..boxplot = NA,
-        ..jitter = NA)
+        ..dot = NA,
+        ..dotType = NA)
 )
 
 #' @import jmvcore
@@ -95,7 +106,8 @@ rplotsResults <- R6::R6Class(
                         "splitBy",
                         "violin",
                         "boxplot",
-                        "jitter")))
+                        "dot",
+                        "dotType")))
             self$add(private$..plots)}))
 
 #' @importFrom jmvcore Analysis
@@ -127,7 +139,8 @@ rplotsBase <- R6::R6Class(
 #' @param splitBy .
 #' @param violin .
 #' @param boxplot .
-#' @param jitter .
+#' @param dot .
+#' @param dotType .
 #' @export
 rplots <- function(
     data,
@@ -135,14 +148,16 @@ rplots <- function(
     splitBy,
     violin = TRUE,
     boxplot = TRUE,
-    jitter = FALSE) {
+    dot = FALSE,
+    dotType = "jitter") {
 
     options <- rplotsOptions$new(
         vars = vars,
         splitBy = splitBy,
         violin = violin,
         boxplot = boxplot,
-        jitter = jitter)
+        dot = dot,
+        dotType = dotType)
 
     results <- rplotsResults$new(
         options = options)

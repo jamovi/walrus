@@ -42,11 +42,20 @@ rplotsClass <- R6::R6Class(
             if (self$options$violin)
                 p <- p + ggplot2::geom_violin(fill=theme$fill[1], color=theme$color[1])
             
-            if (self$options$jitter)
-                p <- p + ggplot2::geom_jitter(color=theme$color[1], width=0.1, alpha=0.4)
+            if (self$options$dot) {
+                if (self$options$dotType == 'jitter')
+                    p <- p + ggplot2::geom_jitter(color=theme$color[1], width=0.1, alpha=0.4)
+                else
+                    p <- p + ggplot2::geom_dotplot(binaxis = "y", stackdir = "center", color=theme$color[1], 
+                                                   alpha=0.4, stackratio=0.9, dotsize=0.7)
+            }
+                
             
             if (self$options$boxplot)
-                p <- p + ggplot2::geom_boxplot(color=theme$color[1], width=0.2, alpha=0.9, fill=theme$fill[2], outlier.colour=theme$color[1])
+                p <- p + ggplot2::geom_boxplot(color=theme$color[1], width=0.2, alpha=0.9, fill=theme$fill[2], 
+                                               outlier.colour=theme$color[1])
+            
+            
             
             if (is.null(self$options$splitBy)) {
                 p <- p + ggplot2::theme(axis.text.x = ggplot2::element_blank(),
@@ -54,7 +63,11 @@ rplotsClass <- R6::R6Class(
                                         axis.title.x = ggplot2::element_blank())
             }
             
-            print(p)
+            suppressWarnings({
+                suppressMessages({
+                    print(p)
+                }) # suppressMessages
+            }) # suppressWarnings
             
             TRUE
         })

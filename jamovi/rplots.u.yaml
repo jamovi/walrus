@@ -45,4 +45,9 @@ children:
       - type: CheckBox
         name: boxplot
       - type: CheckBox
-        name: jitter
+        name: dot
+        style: list-inline
+        children:
+          - type: ComboBox
+            name: dotType
+            enable: (dot)
