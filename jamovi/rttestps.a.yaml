@@ -9,10 +9,26 @@ jas: '1.1'
 description:
     main: Robust Paired Samples T-Test
     R:
+        dontrun: false
         usage: |
-            rttestPS(data,
-                pairs = list(
-                    list(i1 = 'x', i2 = 'y')))
+            data(anorexia, package='MASS')
+            anorexiaFT <- subset(anorexia, subset = Treat == "FT")
+            
+            rttestPS(anorexiaFT,
+                     pairs = list(
+                         list(i1 = 'Prewt', i2 = 'Postwt')))
+            
+            # 
+            #  ROBUST PAIRED SAMPLES T-TEST
+            # 
+            #  Robust Paired Samples T-Test                  
+            #  ───────────────────────────────────────────── 
+            #                       t        df      p       
+            #  ───────────────────────────────────────────── 
+            #    Prewt    Postwt    -3.83    10.0    0.003   
+            #  ───────────────────────────────────────────── 
+            # 
+
 
 completeWhenFilled: true
 
@@ -40,6 +56,11 @@ options:
       min: 0
       max: 0.5
       default: 0.2
+      description:
+          R: >
+            a number between 0 and 0.5, (default: 0.2), the proportion of
+            measurements to trim from each end, when using the trim and
+            bootstrap methods
 
     - name: md
       title: Mean difference

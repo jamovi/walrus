@@ -18,8 +18,8 @@ rttestISOptions <- R6::R6Class(
             nboot = 599,
             md = FALSE,
             ci = FALSE,
-            es = NULL,
-            esci = NULL, ...) {
+            es = FALSE,
+            esci = FALSE, ...) {
 
             super$initialize(
                 package='walrus',
@@ -75,10 +75,12 @@ rttestISOptions <- R6::R6Class(
                 default=FALSE)
             private$..es <- jmvcore::OptionBool$new(
                 "es",
-                es)
+                es,
+                default=FALSE)
             private$..esci <- jmvcore::OptionBool$new(
                 "esci",
-                esci)
+                esci,
+                default=FALSE)
         
             self$.addOption(private$..deps)
             self$.addOption(private$..group)
@@ -187,20 +189,67 @@ rttestISBase <- R6::R6Class(
 
 #' Robust Independent Samples T-Test
 #'
+#' Robust Independent Samples T-Test
+#'
+#' @examples
+#' data('eurosoccer', package='WRS2')
 #' 
-#' @param data .
-#' @param deps .
-#' @param group .
-#' @param yuen .
-#' @param tr .
-#' @param mest .
-#' @param method .
-#' @param yuenbt .
-#' @param nboot .
-#' @param md .
-#' @param ci .
-#' @param es .
-#' @param esci .
+#' SpainGermany <- subset(eurosoccer, eurosoccer$League == 'Spain' | eurosoccer$League == 'Germany')
+#' SpainGermany <- droplevels(SpainGermany)
+#' 
+#' rttestIS(SpainGermany,
+#'          dep = 'GoalsScored',
+#'          group = 'League',
+#'          yuen = TRUE,
+#'          mest = TRUE)
+#' 
+#' # 
+#' #  ROBUST INDEPENDENT SAMPLES T-TEST
+#' # 
+#' #  Robust Independent Samples T-Test                        
+#' #  ---------------------------------------------------------
+#' #                                  t         df      p     
+#' #  --------------------------------------------------------- 
+#' #    GoalsScored    Yuen's test     0.297    17.3    0.770 
+#' #                   M-estimator    -0.933            0.993 
+#' #  ---------------------------------------------------------
+#' # 
+#' 
+#' @param data the data as a data frame
+#' @param deps a vector of strings naming the dependent variables in 
+#'   \code{data}
+#' @param group a string naming the grouping variable in \code{data}; must 
+#'   have 2 levels
+#' @param yuen \code{TRUE} (default) or \code{FALSE}, use the Yuen's trim 
+#'   method 
+#' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of 
+#'   measurements to trim from each end, when using the trim and bootstrap 
+#'   methods 
+#' @param mest \code{TRUE} or \code{FALSE} (default), use an M-estimator 
+#' @param method \code{'onestep'}, \code{'mom'} (default) or \code{'median'}, 
+#'   the M-estimator to use; One-step, Modified one-step or Median respectively 
+#' @param yuenbt \code{TRUE} or \code{FALSE} (default), use the Yuen's 
+#'   bootstrap method 
+#' @param nboot a number (default: 599) specifying the number of bootstrap 
+#'   samples to use when using the bootstrap method 
+#' @param md \code{TRUE} or \code{FALSE} (default), provide the mean 
+#'   difference 
+#' @param ci \code{TRUE} or \code{FALSE} (default), provide a 95% confidence 
+#'   interval on the mean difference 
+#' @param es \code{TRUE} or \code{FALSE} (default), provide the effect-size 
+#' @param esci \code{TRUE} or \code{FALSE} (default), provide a 95% confidence 
+#'   interval on the effect-size 
+#' @return A results object containing:
+#' \tabular{llllll}{
+#'   \code{results$ttest} \tab \tab \tab \tab \tab a table \cr
+#' }
+#'
+#' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
+#'
+#' \code{results$ttest$asDF}
+#'
+#' \code{as.data.frame(results$ttest)}
+#'
 #' @export
 rttestIS <- function(
     data,
@@ -214,8 +263,8 @@ rttestIS <- function(
     nboot = 599,
     md = FALSE,
     ci = FALSE,
-    es,
-    esci) {
+    es = FALSE,
+    esci = FALSE) {
 
     options <- rttestISOptions$new(
         deps = deps,

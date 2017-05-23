@@ -125,20 +125,46 @@ rttestPSBase <- R6::R6Class(
 #' Robust Paired Samples T-Test
 #'
 #' @examples
-#' \dontrun{
-#' rttestPS(data,
-#'     pairs = list(
-#'         list(i1 = 'x', i2 = 'y')))
-#' }
+#' data(anorexia, package='MASS')
+#' anorexiaFT <- subset(anorexia, subset = Treat == "FT")
+#' 
+#' rttestPS(anorexiaFT,
+#'          pairs = list(
+#'              list(i1 = 'Prewt', i2 = 'Postwt')))
+#' 
+#' # 
+#' #  ROBUST PAIRED SAMPLES T-TEST
+#' # 
+#' #  Robust Paired Samples T-Test                  
+#' #  --------------------------------------------- 
+#' #                       t        df      p       
+#' #  --------------------------------------------- 
+#' #    Prewt    Postwt    -3.83    10.0    0.003   
+#' #  --------------------------------------------- 
+#' # 
+#' 
 #' @param data the data as a data frame
 #' @param pairs a list of lists specifying the pairs of measurement in 
 #'   \code{data}
-#' @param tr .
+#' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of 
+#'   measurements to trim from each end, when using the trim and bootstrap 
+#'   methods 
 #' @param md \code{TRUE} or \code{FALSE} (default), provide means and standard 
 #'   errors 
 #' @param es \code{TRUE} or \code{FALSE} (default), provide effect sizes 
 #' @param ci \code{TRUE} or \code{FALSE} (default), provide confidence 
 #'   intervals 
+#' @return A results object containing:
+#' \tabular{llllll}{
+#'   \code{results$ttest} \tab \tab \tab \tab \tab a table \cr
+#' }
+#'
+#' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
+#'
+#' \code{results$ttest$asDF}
+#'
+#' \code{as.data.frame(results$ttest)}
+#'
 #' @export
 rttestPS <- function(
     data,

@@ -37,6 +37,7 @@ rdescOptions <- R6::R6Class(
             private$..splitBy <- jmvcore::OptionVariable$new(
                 "splitBy",
                 splitBy,
+                default=NULL,
                 suggested=list(
                     "nominal"),
                 permitted=list(
@@ -178,23 +179,73 @@ rdescBase <- R6::R6Class(
 
 #' Robust Descriptives
 #'
+#' Robust Descriptives
+#'
+#' @examples
 #' 
-#' @param data .
-#' @param vars .
-#' @param splitBy .
-#' @param mean .
-#' @param trim .
-#' @param tr .
-#' @param win .
-#' @param wl .
-#' @param mest .
-#' @param bend .
-#' @param med .
+#' data('eurosoccer', package='WRS2')
+#' 
+#' SpainGermany <- subset(eurosoccer, eurosoccer$League == 'Spain' | eurosoccer$League == 'Germany')
+#' SpainGermany <- droplevels(SpainGermany)
+#' 
+#' walrus::rdesc(
+#'     data = SpainGermany,
+#'     vars = "GoalsGame",
+#'     splitBy = "League",
+#'     med = TRUE)
+#' 
+#' #
+#' #  ROBUST DESCRIPTIVES
+#' #
+#' #  Robust Descriptives                                        
+#' #  ---------------------------------------------------------- 
+#' #                                                    SE       
+#' #  ---------------------------------------------------------- 
+#' #    GoalsGame    Germany    Mean            1.46     0.105   
+#' #                            Trimmed mean    1.45    0.1341   
+#' #                            Median          1.43    0.1599   
+#' #                                                             
+#' #                 Spain      Mean            1.45     0.101   
+#' #                            Trimmed mean    1.33    0.0601   
+#' #                            Median          1.30    0.0766   
+#' #  ---------------------------------------------------------- 
+#' #
+#' 
+#' @param data the data as a data frame
+#' @param vars a vector of strings naming the variables in \code{data} of 
+#'   interest
+#' @param splitBy a string naming the variable in \code{data} to split the 
+#'   data by
+#' @param mean \code{TRUE} (default) or \code{FALSE}, provide a 'normal' 
+#'   arithmetic mean 
+#' @param trim \code{TRUE} (default) or \code{FALSE}, provide a trimmed mean 
+#' @param tr a number between 0 and 0.5 (default: 0.2); the proportion of 
+#'   measurements to trim from each end when producing trimmed means 
+#' @param win \code{TRUE} or \code{FALSE} (default), provide a 'Winsorized' 
+#'   mean 
+#' @param wl a number between 0 and 0.5 (default: 0.2); the level of 
+#'   'winsorizing' when producing winsorized means 
+#' @param mest \code{TRUE} or \code{FALSE} (default), provide an 'M-estimated' 
+#'   value 
+#' @param bend a number (default: 1.28), the bending constant to use when 
+#'   using M-estimators 
+#' @param med \code{TRUE} or \code{FALSE} (default), provide medians 
+#' @return A results object containing:
+#' \tabular{llllll}{
+#'   \code{results$table} \tab \tab \tab \tab \tab a table \cr
+#' }
+#'
+#' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
+#'
+#' \code{results$table$asDF}
+#'
+#' \code{as.data.frame(results$table)}
+#'
 #' @export
 rdesc <- function(
     data,
     vars,
-    splitBy,
+    splitBy = NULL,
     mean = TRUE,
     trim = TRUE,
     tr = 0.2,

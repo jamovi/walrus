@@ -3,15 +3,15 @@
 
 #' @importFrom jmvcore Options
 #' @importFrom R6 R6Class
-rAnovaOptions <- R6::R6Class(
-    "rAnovaOptions",
+ranovaOptions <- R6::R6Class(
+    "ranovaOptions",
     inherit = jmvcore::Options,
     public = list(
         initialize = function(
             dep = NULL,
             factors = NULL,
             method = "trim",
-            ph = NULL,
+            ph = FALSE,
             tr = 0.2,
             est = "mom",
             nboot = 599,
@@ -19,7 +19,7 @@ rAnovaOptions <- R6::R6Class(
 
             super$initialize(
                 package='walrus',
-                name='rAnova',
+                name='ranova',
                 requiresData=TRUE,
                 ...)
         
@@ -49,7 +49,8 @@ rAnovaOptions <- R6::R6Class(
                 default="trim")
             private$..ph <- jmvcore::OptionBool$new(
                 "ph",
-                ph)
+                ph,
+                default=FALSE)
             private$..tr <- jmvcore::OptionNumber$new(
                 "tr",
                 tr,
@@ -108,7 +109,7 @@ rAnovaOptions <- R6::R6Class(
 
 #' @import jmvcore
 #' @importFrom R6 R6Class
-rAnovaResults <- R6::R6Class(
+ranovaResults <- R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
         main = function() private$..main,
@@ -165,17 +166,17 @@ rAnovaResults <- R6::R6Class(
 
 #' @importFrom jmvcore Analysis
 #' @importFrom R6 R6Class
-rAnovaBase <- R6::R6Class(
-    "rAnovaBase",
+ranovaBase <- R6::R6Class(
+    "ranovaBase",
     inherit = jmvcore::Analysis,
     public = list(
         initialize = function(options, data=NULL, datasetId="", analysisId="", revision=0) {
             super$initialize(
                 package = 'walrus',
-                name = 'rAnova',
+                name = 'ranova',
                 version = c(1,0,0),
                 options = options,
-                results = rAnovaResults$new(options=options),
+                results = ranovaResults$new(options=options),
                 data = data,
                 datasetId = datasetId,
                 analysisId = analysisId,
@@ -189,35 +190,90 @@ rAnovaBase <- R6::R6Class(
 #' Robust Analysis of Variance
 #'
 #' @examples
-#' \dontrun{
-#' rAnova(ToothGrowth,
-#'     dep='len',
-#'     factors=c('dose', 'supp'))
-#' }
+#' data('goggles', package='WRS2')
+#' 
+#' ranova(goggles,
+#'        dep='attractiveness',
+#'        factors=c('gender', 'alcohol'),
+#'        ph=TRUE)
+#' 
+#' #
+#' #  ROBUST ANOVA
+#' #
+#' #  Robust ANOVA                         
+#' #  ------------------------------------ 
+#' #                      Q        p       
+#' #  ------------------------------------ 
+#' #    gender             1.67    0.209   
+#' #    alcohol           48.28    0.001   
+#' #    gender:alcohol    26.26    0.001   
+#' #  ------------------------------------ 
+#' #   Note. Method of trimmed means,
+#' #   trim level 0.2
+#' #
+#' #
+#' #  POST HOC TESTS
+#' #
+#' #  Post Hoc Tests - gender                                  
+#' #  -------------------------------------------------------- 
+#' #                       psi-hat   p        Lower    Upper   
+#' #  -------------------------------------------------------- 
+#' #    Female    Male     10.0      0.209    -6.00    26.0   
+#' #  -------------------------------------------------------- 
+#' #
+#' #
+#' #  Post Hoc Tests - alcohol                                      
+#' #  ------------------------------------------------------------- 
+#' #                           psi-hat   p         Lower    Upper   
+#' #  ------------------------------------------------------------- 
+#' #    None       2 Pints     -3.33      0.611    -20.5     13.8   
+#' #    None       4 Pints     35.83     < .001     19.3     52.3   
+#' #    2 Pints    4 Pints     39.17     < .001     22.5     55.9   
+#' #  ------------------------------------------------------------- 
+#' #
+#' 
 #' @param data the data as a data frame
-#' @param dep a string naming the dependent variable from \code{data}, 
+#' @param dep a string naming the dependent variable from \code{data}; the 
 #'   variable must be numeric 
 #' @param factors a vector of strings naming the fixed factors from 
 #'   \code{data}
-#' @param method .
-#' @param ph .
-#' @param tr .
-#' @param est .
-#' @param nboot .
-#' @param dist .
+#' @param method \code{'median'}, \code{'trim'} (default) or \code{'boot'}; 
+#'   the method to use, median, trimmed means, or bootstrapped 
+#' @param ph \code{TRUE} or \code{FALSE} (default), provide post hoc tests 
+#' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of 
+#'   measurements to trim from each end, when using the trim and bootstrap 
+#'   methods 
+#' @param est \code{'onestep'}, \code{'mom'} (default) or \code{'median'}, the 
+#'   M-estimator to use; One-step, Modified one-step or Median respectively 
+#' @param nboot a number (default: 599) specifying the number of bootstrap 
+#'   samples to use when using the bootstrap method 
+#' @param dist \code{'maha'} or \code{'proj'} (default), whether to use 
+#'   Mahalanobis or Projection distances respectively 
+#' @return A results object containing:
+#' \tabular{llllll}{
+#'   \code{results$main} \tab \tab \tab \tab \tab a table \cr
+#'   \code{results$phs} \tab \tab \tab \tab \tab an array of tables \cr
+#' }
+#'
+#' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
+#'
+#' \code{results$main$asDF}
+#'
+#' \code{as.data.frame(results$main)}
+#'
 #' @export
-rAnova <- function(
+ranova <- function(
     data,
     dep,
     factors = NULL,
     method = "trim",
-    ph,
+    ph = FALSE,
     tr = 0.2,
     est = "mom",
     nboot = 599,
     dist = "proj") {
 
-    options <- rAnovaOptions$new(
+    options <- ranovaOptions$new(
         dep = dep,
         factors = factors,
         method = method,
@@ -227,10 +283,10 @@ rAnova <- function(
         nboot = nboot,
         dist = dist)
 
-    results <- rAnovaResults$new(
+    results <- ranovaResults$new(
         options = options)
 
-    analysis <- rAnovaClass$new(
+    analysis <- ranovaClass$new(
         options = options,
         data = data)
 

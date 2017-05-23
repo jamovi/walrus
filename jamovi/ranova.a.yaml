@@ -1,5 +1,5 @@
 ---
-name: rAnova
+name: ranova
 title: Robust ANOVA
 menuGroup: walrus
 menuSubgroup: ANOVAs
@@ -9,10 +9,49 @@ jas: '1.1'
 description:
     main: Robust Analysis of Variance
     R:
+        dontrun: false
         usage: |
-            rAnova(ToothGrowth,
-                dep='len',
-                factors=c('dose', 'supp'))
+            data('goggles', package='WRS2')
+            
+            ranova(goggles,
+                   dep='attractiveness',
+                   factors=c('gender', 'alcohol'),
+                   ph=TRUE)
+            
+            #
+            #  ROBUST ANOVA
+            #
+            #  Robust ANOVA                         
+            #  ──────────────────────────────────── 
+            #                      Q        p       
+            #  ──────────────────────────────────── 
+            #    gender             1.67    0.209   
+            #    alcohol           48.28    0.001   
+            #    gender:alcohol    26.26    0.001   
+            #  ──────────────────────────────────── 
+            #   Note. Method of trimmed means,
+            #   trim level 0.2
+            #
+            #
+            #  POST HOC TESTS
+            #
+            #  Post Hoc Tests - gender                                  
+            #  ──────────────────────────────────────────────────────── 
+            #                       psi-hat   p        Lower    Upper   
+            #  ──────────────────────────────────────────────────────── 
+            #    Female    Male     10.0      0.209    -6.00    26.0   
+            #  ──────────────────────────────────────────────────────── 
+            #
+            #
+            #  Post Hoc Tests - alcohol                                      
+            #  ───────────────────────────────────────────────────────────── 
+            #                           psi-hat   p         Lower    Upper   
+            #  ───────────────────────────────────────────────────────────── 
+            #    None       2 Pints     -3.33      0.611    -20.5     13.8   
+            #    None       4 Pints     35.83     < .001     19.3     52.3   
+            #    2 Pints    4 Pints     39.17     < .001     22.5     55.9   
+            #  ───────────────────────────────────────────────────────────── 
+            #
 
 completeWhenFilled: true
 
@@ -33,7 +72,7 @@ options:
         - ordinal
       description:
           R: >
-            a string naming the dependent variable from `data`, variable
+            a string naming the dependent variable from `data`; the variable
             must be numeric
 
     - name: factors
@@ -54,11 +93,19 @@ options:
         - trim
         - boot
       default:
-        trim
+          trim
+      description:
+          R: >
+            `'median'`, `'trim'` (default) or `'boot'`; the method to use,
+            median, trimmed means, or bootstrapped
 
     - name: ph
       title: Post hoc tests
       type: Bool
+      default: false
+      description:
+          R: >
+            `TRUE` or `FALSE` (default), provide post hoc tests
 
     - name: tr
       title: Trim proportion
@@ -66,6 +113,11 @@ options:
       min: 0
       max: 0.5
       default: 0.2
+      description:
+          R: >
+            a number between 0 and 0.5, (default: 0.2), the proportion of
+            measurements to trim from each end, when using the trim and
+            bootstrap methods
 
     - name: est
       title: Estimator
@@ -78,12 +130,20 @@ options:
         - name: median
           title: Median
       default: mom
+      description:
+          R: >
+            `'onestep'`, `'mom'` (default) or `'median'`, the M-estimator to
+            use; One-step, Modified one-step or Median respectively
 
     - name: nboot
       title: Samples
       type: Integer
       min: 0
       default: 599
+      description:
+          R: >
+            a number (default: 599) specifying the number of bootstrap samples
+            to use when using the bootstrap method
 
     - name: dist
       title: Distances
@@ -94,3 +154,8 @@ options:
         - name: proj
           title: Projection
       default: proj
+      description:
+          R: >
+            `'maha'` or `'proj'` (default), whether to use Mahalanobis or
+            Projection distances respectively
+          

@@ -5,9 +5,36 @@ menuGroup: walrus
 version: '1.0.0'
 jas: '1.1'
 
+description:
+    main: Box & Violin Plots
+    R:
+        dontrun: false
+        usage: |
+            data('eurosoccer', package='WRS2')
+            
+            # violin plots
+            
+            walrus::rplots(
+                data = eurosoccer,
+                vars = "GoalsGame",
+                splitBy = "League")
+
+            
+            # box plots
+            
+            walrus::rplots(
+                data = eurosoccer,
+                vars = "GoalsGame",
+                splitBy = "League",
+                violin = FALSE,
+                boxplot = TRUE,
+                dot = FALSE)
+
 options:
     - name: data
       type: Data
+      description:
+          R: the data as a data frame
 
     - name: vars
       title: Variables
@@ -18,32 +45,46 @@ options:
         - continuous
         - nominal
         - ordinal
-        
+      description:
+          R: a vector of strings naming the variables in `data` of interest
+
     - name: splitBy
       title: Split by
       type: Variable
+      default:
       suggested:
         - nominal
       permitted:
         - nominal
         - ordinal
         - nominaltext
+      description:
+          R: a string naming the variable in `data` to split the data by
 
     - name: violin
       title: Violin
       type: Bool
       default: true
-      
+      description:
+          R: >
+            `TRUE` (default) or `FALSE`, provide violin plots
+
     - name: boxplot
       title: Boxplot
       type: Bool
-      default: true
+      default: false
+      description:
+          R: >
+            `TRUE` or `FALSE` (default), provide box plots
 
     - name: dot
       title: Data
       type: Bool
-      default: false
-      
+      default: true
+      description:
+          R: >
+            `TRUE` (default) or `FALSE`, plot each measurement as a dot
+
     - name: dotType
       title: ''
       type: List
@@ -52,5 +93,10 @@ options:
           title: "Jittered"
         - name: stack
           title: "Stacked"
-      default: jitter
+      default: stack
+      description:
+          R: >
+            `'jitter'` or `'stack'` (default); whether data dots are jittered
+            or stacked
+      
 ...

@@ -1,9 +1,9 @@
 
 # This file is a generated template, your changes will not be overwritten
 
-rAnovaClass <- R6::R6Class(
-    "rAnovaClass",
-    inherit = rAnovaBase,
+ranovaClass <- R6::R6Class(
+    "ranovaClass",
+    inherit = ranovaBase,
     private = list(
         .cleanData = function() {
             
@@ -290,9 +290,6 @@ rAnovaClass <- R6::R6Class(
                         pro.dis <- TRUE
                     else
                         pro.dis <- FALSE
-                    
-                    print(main)
-                    print(main$isFilled())
                     
                     if ( ! main$isFilled()) {
                     

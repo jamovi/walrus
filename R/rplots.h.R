@@ -11,9 +11,9 @@ rplotsOptions <- R6::R6Class(
             vars = NULL,
             splitBy = NULL,
             violin = TRUE,
-            boxplot = TRUE,
-            dot = FALSE,
-            dotType = "jitter", ...) {
+            boxplot = FALSE,
+            dot = TRUE,
+            dotType = "stack", ...) {
 
             super$initialize(
                 package='walrus',
@@ -33,6 +33,7 @@ rplotsOptions <- R6::R6Class(
             private$..splitBy <- jmvcore::OptionVariable$new(
                 "splitBy",
                 splitBy,
+                default=NULL,
                 suggested=list(
                     "nominal"),
                 permitted=list(
@@ -46,18 +47,18 @@ rplotsOptions <- R6::R6Class(
             private$..boxplot <- jmvcore::OptionBool$new(
                 "boxplot",
                 boxplot,
-                default=TRUE)
+                default=FALSE)
             private$..dot <- jmvcore::OptionBool$new(
                 "dot",
                 dot,
-                default=FALSE)
+                default=TRUE)
             private$..dotType <- jmvcore::OptionList$new(
                 "dotType",
                 dotType,
                 options=list(
                     "jitter",
                     "stack"),
-                default="jitter")
+                default="stack")
         
             self$.addOption(private$..vars)
             self$.addOption(private$..splitBy)
@@ -133,23 +134,54 @@ rplotsBase <- R6::R6Class(
 
 #' Box & Violin Plots
 #'
+#' Box & Violin Plots
+#'
+#' @examples
+#' data('eurosoccer', package='WRS2')
 #' 
-#' @param data .
-#' @param vars .
-#' @param splitBy .
-#' @param violin .
-#' @param boxplot .
-#' @param dot .
-#' @param dotType .
+#' # violin plots
+#' 
+#' walrus::rplots(
+#'     data = eurosoccer,
+#'     vars = "GoalsGame",
+#'     splitBy = "League")
+#' 
+#' 
+#' # box plots
+#' 
+#' walrus::rplots(
+#'     data = eurosoccer,
+#'     vars = "GoalsGame",
+#'     splitBy = "League",
+#'     violin = FALSE,
+#'     boxplot = TRUE,
+#'     dot = FALSE)
+#' 
+#' @param data the data as a data frame
+#' @param vars a vector of strings naming the variables in \code{data} of 
+#'   interest
+#' @param splitBy a string naming the variable in \code{data} to split the 
+#'   data by
+#' @param violin \code{TRUE} (default) or \code{FALSE}, provide violin plots 
+#' @param boxplot \code{TRUE} or \code{FALSE} (default), provide box plots 
+#' @param dot \code{TRUE} (default) or \code{FALSE}, plot each measurement as 
+#'   a dot 
+#' @param dotType \code{'jitter'} or \code{'stack'} (default); whether data 
+#'   dots are jittered or stacked 
+#' @return A results object containing:
+#' \tabular{llllll}{
+#'   \code{results$plots} \tab \tab \tab \tab \tab an array of images \cr
+#' }
+#'
 #' @export
 rplots <- function(
     data,
     vars,
-    splitBy,
+    splitBy = NULL,
     violin = TRUE,
-    boxplot = TRUE,
-    dot = FALSE,
-    dotType = "jitter") {
+    boxplot = FALSE,
+    dot = TRUE,
+    dotType = "stack") {
 
     options <- rplotsOptions$new(
         vars = vars,
