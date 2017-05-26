@@ -1,53 +1,52 @@
 ---
 title: Walrus - Robust Statistical Methods
 name: walrus
-version: 0.2.0
+version: 1.0.0
 jms: '1.0'
 authors:
   - Jonathon Love
   - Patrick Mair
-  - Rand Wilcox
 maintainer: Jonathon Love <jon@thon.cc>
-date: '2017-03-16'
+date: '2017-05-26'
 type: R
 description: >-
-  Walrus is a toolbox of common robust statistical tests, including robust
-  descriptives, robust t-tests, and robust ANOVA. Walrus is based on the WRS2
-  package by Patrick Mair, which is in turn based on the scripts and work of
-  Rand Wilcox. These analyses are described in depth in the book <a
+  A toolbox of common robust statistical tests, including robust descriptives,
+  robust t-tests, and robust ANOVA. Walrus is based on the WRS2 package by
+  Patrick Mair, which is in turn based on the scripts and work of Rand Wilcox.
+  These analyses are described in depth in the book <a
   href="https://www.amazon.com/Introduction-Estimation-Hypothesis-Statistical-Modeling/dp/012804733X"
   target="_blank"> Introduction to Robust Estimation & Hypothesis Testing</a>.
 analyses:
   - title: Box & Violin Plots
     name: rplots
     ns: walrus
-    menuGroup: walrus
+    menuGroup: Walrus
     menuTitle: Box & Violin Plots
     description: Box & Violin Plots
   - title: Robust Descriptives
     name: rdesc
     ns: walrus
-    menuGroup: walrus
+    menuGroup: Walrus
     menuTitle: Robust Descriptives
     description: Robust Descriptives
   - title: Robust Independent Samples T-Test
     name: rttestIS
     ns: walrus
-    menuGroup: walrus
+    menuGroup: Walrus
     menuSubgroup: T-Tests
     menuTitle: Robust Independent Samples T-Test
     description: Robust Independent Samples T-Test
   - title: Robust Paired Samples T-Test
     name: rttestPS
     ns: walrus
-    menuGroup: walrus
+    menuGroup: Walrus
     menuSubgroup: T-Tests
     menuTitle: Robust Paired Samples T-Test
     description: Robust Paired Samples T-Test
   - title: Robust ANOVA
     name: ranova
     ns: walrus
-    menuGroup: walrus
+    menuGroup: Walrus
     menuTitle: Robust ANOVA
     description: Robust Analysis of Variance
     menuSubgroup: ANOVAs

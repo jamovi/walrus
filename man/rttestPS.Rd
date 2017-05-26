@@ -27,7 +27,7 @@ intervals}
 \value{
 A results object containing:
 \tabular{llllll}{
-  \code{results$ttest} \tab \tab \tab \tab \tab a table \cr
+  \code{results$ttest} \tab \tab \tab \tab \tab the table of t-test results \cr
 }
 
 Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

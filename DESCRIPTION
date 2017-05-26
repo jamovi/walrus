@@ -1,13 +1,18 @@
 Package: walrus
 Type: Package
 Title: Robust Statistical Methods
-Version: 0.2.0
-Author: Jonathon Love
+Version: 1.0.0
+Author: Jonathon Love, Patrick Mair
 Maintainer: Jonathon Love <jon@thon.cc>
-Description: Robust statistical methods FTW!
+Description: A toolbox of common robust statistical tests, including robust
+  descriptives, robust t-tests, and robust ANOVA. It is also available as a
+  module for 'jamovi' (see <https://www.jamovi.org> for more information).
+  Walrus is based on the WRS2 package by Patrick Mair, which is in turn based on
+  the scripts and work of Rand Wilcox. These analyses are described in depth in
+  the book 'Introduction to Robust Estimation & Hypothesis Testing'.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: jmvcore (>= 0.5.5), R6, WRS2, ggplot2
+Imports: WRS2, ggplot2, jmvcore (>= 0.5.5), R6
 Suggests: MASS
 RoxygenNote: 6.0.1

@@ -193,43 +193,43 @@ ranovaBase <- R6::R6Class(
 #' data('goggles', package='WRS2')
 #' 
 #' ranova(goggles,
-#'        dep='attractiveness',
-#'        factors=c('gender', 'alcohol'),
-#'        ph=TRUE)
+#'        dep = 'attractiveness',
+#'        factors = c('gender', 'alcohol'),
+#'        ph = TRUE)
 #' 
 #' #
 #' #  ROBUST ANOVA
 #' #
-#' #  Robust ANOVA                         
-#' #  ------------------------------------ 
-#' #                      Q        p       
-#' #  ------------------------------------ 
-#' #    gender             1.67    0.209   
-#' #    alcohol           48.28    0.001   
-#' #    gender:alcohol    26.26    0.001   
-#' #  ------------------------------------ 
+#' #  Robust ANOVA
+#' #  ------------------------------------
+#' #                      Q        p
+#' #  ------------------------------------
+#' #    gender             1.67    0.209
+#' #    alcohol           48.28    0.001
+#' #    gender:alcohol    26.26    0.001
+#' #  ------------------------------------
 #' #   Note. Method of trimmed means,
 #' #   trim level 0.2
 #' #
 #' #
 #' #  POST HOC TESTS
 #' #
-#' #  Post Hoc Tests - gender                                  
-#' #  -------------------------------------------------------- 
-#' #                       psi-hat   p        Lower    Upper   
-#' #  -------------------------------------------------------- 
-#' #    Female    Male     10.0      0.209    -6.00    26.0   
-#' #  -------------------------------------------------------- 
+#' #  Post Hoc Tests - gender
+#' #  --------------------------------------------------------
+#' #                       psi-hat   p        Lower    Upper
+#' #  --------------------------------------------------------
+#' #    Female    Male     10.0      0.209    -6.00    26.0
+#' #  --------------------------------------------------------
 #' #
 #' #
-#' #  Post Hoc Tests - alcohol                                      
-#' #  ------------------------------------------------------------- 
-#' #                           psi-hat   p         Lower    Upper   
-#' #  ------------------------------------------------------------- 
-#' #    None       2 Pints     -3.33      0.611    -20.5     13.8   
-#' #    None       4 Pints     35.83     < .001     19.3     52.3   
-#' #    2 Pints    4 Pints     39.17     < .001     22.5     55.9   
-#' #  ------------------------------------------------------------- 
+#' #  Post Hoc Tests - alcohol
+#' #  -------------------------------------------------------------
+#' #                           psi-hat   p         Lower    Upper
+#' #  -------------------------------------------------------------
+#' #    None       2 Pints     -3.33      0.611    -20.5     13.8
+#' #    None       4 Pints     35.83     < .001     19.3     52.3
+#' #    2 Pints    4 Pints     39.17     < .001     22.5     55.9
+#' #  -------------------------------------------------------------
 #' #
 #' 
 #' @param data the data as a data frame
@@ -251,8 +251,8 @@ ranovaBase <- R6::R6Class(
 #'   Mahalanobis or Projection distances respectively 
 #' @return A results object containing:
 #' \tabular{llllll}{
-#'   \code{results$main} \tab \tab \tab \tab \tab a table \cr
-#'   \code{results$phs} \tab \tab \tab \tab \tab an array of tables \cr
+#'   \code{results$main} \tab \tab \tab \tab \tab the table of ANOVA results \cr
+#'   \code{results$phs} \tab \tab \tab \tab \tab the table of posthoc tests \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

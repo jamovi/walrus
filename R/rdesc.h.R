@@ -197,18 +197,18 @@ rdescBase <- R6::R6Class(
 #' #
 #' #  ROBUST DESCRIPTIVES
 #' #
-#' #  Robust Descriptives                                        
-#' #  ---------------------------------------------------------- 
-#' #                                                    SE       
-#' #  ---------------------------------------------------------- 
-#' #    GoalsGame    Germany    Mean            1.46     0.105   
-#' #                            Trimmed mean    1.45    0.1341   
-#' #                            Median          1.43    0.1599   
-#' #                                                             
-#' #                 Spain      Mean            1.45     0.101   
-#' #                            Trimmed mean    1.33    0.0601   
-#' #                            Median          1.30    0.0766   
-#' #  ---------------------------------------------------------- 
+#' #  Robust Descriptives
+#' #  ----------------------------------------------------------
+#' #                                                    SE
+#' #  ----------------------------------------------------------
+#' #    GoalsGame    Germany    Mean            1.46     0.105
+#' #                            Trimmed mean    1.45    0.1341
+#' #                            Median          1.43    0.1599
+#' #
+#' #                 Spain      Mean            1.45     0.101
+#' #                            Trimmed mean    1.33    0.0601
+#' #                            Median          1.30    0.0766
+#' #  ----------------------------------------------------------
 #' #
 #' 
 #' @param data the data as a data frame
@@ -232,7 +232,7 @@ rdescBase <- R6::R6Class(
 #' @param med \code{TRUE} or \code{FALSE} (default), provide medians 
 #' @return A results object containing:
 #' \tabular{llllll}{
-#'   \code{results$table} \tab \tab \tab \tab \tab a table \cr
+#'   \code{results$table} \tab \tab \tab \tab \tab the table of descriptives \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

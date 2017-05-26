@@ -1,7 +1,7 @@
 ---
 name: rttestPS
 title: Robust Paired Samples T-Test
-menuGroup: walrus
+menuGroup: Walrus
 menuSubgroup: T-Tests
 version: '1.0.0'
 jas: '1.1'
@@ -13,21 +13,21 @@ description:
         usage: |
             data(anorexia, package='MASS')
             anorexiaFT <- subset(anorexia, subset = Treat == "FT")
-            
+
             rttestPS(anorexiaFT,
                      pairs = list(
                          list(i1 = 'Prewt', i2 = 'Postwt')))
-            
-            # 
+
+            #
             #  ROBUST PAIRED SAMPLES T-TEST
-            # 
-            #  Robust Paired Samples T-Test                  
-            #  ───────────────────────────────────────────── 
-            #                       t        df      p       
-            #  ───────────────────────────────────────────── 
-            #    Prewt    Postwt    -3.83    10.0    0.003   
-            #  ───────────────────────────────────────────── 
-            # 
+            #
+            #  Robust Paired Samples T-Test
+            #  ─────────────────────────────────────────────
+            #                       t        df      p
+            #  ─────────────────────────────────────────────
+            #    Prewt    Postwt    -3.83    10.0    0.003
+            #  ─────────────────────────────────────────────
+            #
 
 
 completeWhenFilled: true

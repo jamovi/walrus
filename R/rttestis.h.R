@@ -29,10 +29,22 @@ rttestISOptions <- R6::R6Class(
         
             private$..deps <- jmvcore::OptionVariables$new(
                 "deps",
-                deps)
+                deps,
+                suggested=list(
+                    "continuous"),
+                permitted=list(
+                    "nominal",
+                    "ordinal",
+                    "continuous"))
             private$..group <- jmvcore::OptionVariable$new(
                 "group",
-                group)
+                group,
+                suggested=list(
+                    "nominal"),
+                permitted=list(
+                    "nominal",
+                    "ordinal",
+                    "nominaltext"))
             private$..yuen <- jmvcore::OptionBool$new(
                 "yuen",
                 yuen,
@@ -203,17 +215,17 @@ rttestISBase <- R6::R6Class(
 #'          yuen = TRUE,
 #'          mest = TRUE)
 #' 
-#' # 
+#' #
 #' #  ROBUST INDEPENDENT SAMPLES T-TEST
-#' # 
-#' #  Robust Independent Samples T-Test                        
+#' #
+#' #  Robust Independent Samples T-Test
 #' #  ---------------------------------------------------------
-#' #                                  t         df      p     
-#' #  --------------------------------------------------------- 
-#' #    GoalsScored    Yuen's test     0.297    17.3    0.770 
-#' #                   M-estimator    -0.933            0.993 
+#' #                                  t         df      p
 #' #  ---------------------------------------------------------
-#' # 
+#' #    GoalsScored    Yuen's test     0.297    17.3    0.770
+#' #                   M-estimator    -0.933            0.993
+#' #  ---------------------------------------------------------
+#' #
 #' 
 #' @param data the data as a data frame
 #' @param deps a vector of strings naming the dependent variables in 
@@ -241,7 +253,7 @@ rttestISBase <- R6::R6Class(
 #'   interval on the effect-size 
 #' @return A results object containing:
 #' \tabular{llllll}{
-#'   \code{results$ttest} \tab \tab \tab \tab \tab a table \cr
+#'   \code{results$ttest} \tab \tab \tab \tab \tab the table of t-test results \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

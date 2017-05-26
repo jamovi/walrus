@@ -132,16 +132,16 @@ rttestPSBase <- R6::R6Class(
 #'          pairs = list(
 #'              list(i1 = 'Prewt', i2 = 'Postwt')))
 #' 
-#' # 
+#' #
 #' #  ROBUST PAIRED SAMPLES T-TEST
-#' # 
-#' #  Robust Paired Samples T-Test                  
-#' #  --------------------------------------------- 
-#' #                       t        df      p       
-#' #  --------------------------------------------- 
-#' #    Prewt    Postwt    -3.83    10.0    0.003   
-#' #  --------------------------------------------- 
-#' # 
+#' #
+#' #  Robust Paired Samples T-Test
+#' #  ---------------------------------------------
+#' #                       t        df      p
+#' #  ---------------------------------------------
+#' #    Prewt    Postwt    -3.83    10.0    0.003
+#' #  ---------------------------------------------
+#' #
 #' 
 #' @param data the data as a data frame
 #' @param pairs a list of lists specifying the pairs of measurement in 
@@ -156,7 +156,7 @@ rttestPSBase <- R6::R6Class(
 #'   intervals 
 #' @return A results object containing:
 #' \tabular{llllll}{
-#'   \code{results$ttest} \tab \tab \tab \tab \tab a table \cr
+#'   \code{results$ttest} \tab \tab \tab \tab \tab the table of t-test results \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

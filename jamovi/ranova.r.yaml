@@ -8,6 +8,7 @@ items:
     - name: main
       title: Robust ANOVA
       type: Table
+      description: the table of ANOVA results
       clearWith:
         - dep
         - factors
@@ -34,6 +35,7 @@ items:
     - name: phs
       title: Post Hoc Tests
       type: Array
+      description: the table of posthoc tests
       items: (factors)
       visible: (ph)
       template:

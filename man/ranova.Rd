@@ -37,8 +37,8 @@ Mahalanobis or Projection distances respectively}
 \value{
 A results object containing:
 \tabular{llllll}{
-  \code{results$main} \tab \tab \tab \tab \tab a table \cr
-  \code{results$phs} \tab \tab \tab \tab \tab an array of tables \cr
+  \code{results$main} \tab \tab \tab \tab \tab the table of ANOVA results \cr
+  \code{results$phs} \tab \tab \tab \tab \tab the table of posthoc tests \cr
 }
 
 Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
@@ -54,9 +54,9 @@ Robust Analysis of Variance
 data('goggles', package='WRS2')
 
 ranova(goggles,
-       dep='attractiveness',
-       factors=c('gender', 'alcohol'),
-       ph=TRUE)
+       dep = 'attractiveness',
+       factors = c('gender', 'alcohol'),
+       ph = TRUE)
 
 #
 #  ROBUST ANOVA

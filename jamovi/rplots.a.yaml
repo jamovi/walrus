@@ -1,7 +1,7 @@
 ---
 name:  rplots
 title: Box & Violin Plots
-menuGroup: walrus
+menuGroup: Walrus
 version: '1.0.0'
 jas: '1.1'
 
@@ -11,17 +11,17 @@ description:
         dontrun: false
         usage: |
             data('eurosoccer', package='WRS2')
-            
+
             # violin plots
-            
+
             walrus::rplots(
                 data = eurosoccer,
                 vars = "GoalsGame",
                 splitBy = "League")
 
-            
+
             # box plots
-            
+
             walrus::rplots(
                 data = eurosoccer,
                 vars = "GoalsGame",
@@ -98,5 +98,5 @@ options:
           R: >
             `'jitter'` or `'stack'` (default); whether data dots are jittered
             or stacked
-      
+
 ...

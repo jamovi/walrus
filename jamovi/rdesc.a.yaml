@@ -1,7 +1,7 @@
 ---
 name:  rdesc
 title: Robust Descriptives
-menuGroup: walrus
+menuGroup: Walrus
 version: '1.0.0'
 jas: '1.1'
 
@@ -10,33 +10,33 @@ description:
     R:
         dontrun: false
         usage: |
-            
+
             data('eurosoccer', package='WRS2')
 
             SpainGermany <- subset(eurosoccer, eurosoccer$League == 'Spain' | eurosoccer$League == 'Germany')
             SpainGermany <- droplevels(SpainGermany)
-            
+
             walrus::rdesc(
                 data = SpainGermany,
                 vars = "GoalsGame",
                 splitBy = "League",
                 med = TRUE)
-            
+
             #
             #  ROBUST DESCRIPTIVES
             #
-            #  Robust Descriptives                                        
-            #  ────────────────────────────────────────────────────────── 
-            #                                                    SE       
-            #  ────────────────────────────────────────────────────────── 
-            #    GoalsGame    Germany    Mean            1.46     0.105   
-            #                            Trimmed mean    1.45    0.1341   
-            #                            Median          1.43    0.1599   
-            #                                                             
-            #                 Spain      Mean            1.45     0.101   
-            #                            Trimmed mean    1.33    0.0601   
-            #                            Median          1.30    0.0766   
-            #  ────────────────────────────────────────────────────────── 
+            #  Robust Descriptives
+            #  ──────────────────────────────────────────────────────────
+            #                                                    SE
+            #  ──────────────────────────────────────────────────────────
+            #    GoalsGame    Germany    Mean            1.46     0.105
+            #                            Trimmed mean    1.45    0.1341
+            #                            Median          1.43    0.1599
+            #
+            #                 Spain      Mean            1.45     0.101
+            #                            Trimmed mean    1.33    0.0601
+            #                            Median          1.30    0.0766
+            #  ──────────────────────────────────────────────────────────
             #
 
 options:
@@ -56,7 +56,7 @@ options:
         - ordinal
       description:
           R: a vector of strings naming the variables in `data` of interest
-        
+
     - name: splitBy
       title: Split by
       type: Variable
@@ -69,7 +69,7 @@ options:
         - nominaltext
       description:
           R: a string naming the variable in `data` to split the data by
-    
+
     - name: mean
       title: Vanilla mean
       type: Bool
@@ -77,7 +77,7 @@ options:
       description:
           R: >
             `TRUE` (default) or `FALSE`, provide a 'normal' arithmetic mean
-    
+
     - name: trim
       title: Trimmed mean
       type: Bool
@@ -96,7 +96,7 @@ options:
           R: >
             a number between 0 and 0.5 (default: 0.2); the proportion of
             measurements to trim from each end when producing trimmed means
-      
+
     - name: win
       title: Winsorized mean
       type: Bool
@@ -104,7 +104,7 @@ options:
       description:
           R: >
             `TRUE` or `FALSE` (default), provide a 'Winsorized' mean
-      
+
     - name: wl
       title: Winsorizing level
       type: Number
@@ -115,8 +115,8 @@ options:
           R: >
             a number between 0 and 0.5 (default: 0.2); the level of
             'winsorizing' when producing winsorized means
-            
-    
+
+
     - name: mest
       title: M-estimator
       type: Bool
@@ -124,7 +124,7 @@ options:
       description:
           R: >
             `TRUE` or `FALSE` (default), provide an 'M-estimated' value
-    
+
     - name: bend
       title: Bending constant
       type: Number
@@ -133,7 +133,7 @@ options:
           R: >
             a number (default: 1.28), the bending constant to use when using
             M-estimators
-      
+
     - name: med
       title: Median
       type: Bool
