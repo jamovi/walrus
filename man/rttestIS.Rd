@@ -73,16 +73,16 @@ rttestIS(SpainGermany,
          yuen = TRUE,
          mest = TRUE)
 
-# 
+#
 #  ROBUST INDEPENDENT SAMPLES T-TEST
-# 
-#  Robust Independent Samples T-Test                        
+#
+#  Robust Independent Samples T-Test
 #  ---------------------------------------------------------
-#                                  t         df      p     
-#  --------------------------------------------------------- 
-#    GoalsScored    Yuen's test     0.297    17.3    0.770 
-#                   M-estimator    -0.933            0.993 
+#                                  t         df      p
 #  ---------------------------------------------------------
-# 
+#    GoalsScored    Yuen's test     0.297    17.3    0.770
+#                   M-estimator    -0.933            0.993
+#  ---------------------------------------------------------
+#
 
 }
