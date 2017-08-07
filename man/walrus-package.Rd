@@ -39,3 +39,11 @@ Ravi gets bonus points
 \if{html}{\figure{walrus.svg}{options: width=72px style="padding-left: 50px"}}
 \if{latex}{\figure{walrus.pdf}{options: width=1in}}
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/jamovi/walrus}
+  \item Report bugs at \url{https://github.com/jamovi/walrus/issues}
+}
+
+}

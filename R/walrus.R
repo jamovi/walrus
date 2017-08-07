@@ -1,4 +1,7 @@
 
+#' @import jmvcore
+NULL
+
 #' Walrus
 #' 
 #' A toolbox of common robust statistical tests, including robust

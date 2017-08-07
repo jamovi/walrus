@@ -13,7 +13,7 @@ Description: A toolbox of common robust statistical tests, including robust
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: WRS2, ggplot2, jmvcore (>= 0.5.5), R6
+Imports: WRS2, ggplot2, jmvcore (>= 0.7.1), R6
 Suggests: MASS
 RoxygenNote: 6.0.1
 URL: https://github.com/jamovi/walrus
