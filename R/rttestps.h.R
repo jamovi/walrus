@@ -17,7 +17,7 @@ rttestPSOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 name='rttestPS',
                 requiresData=TRUE,
                 ...)
-        
+
             private$..pairs <- jmvcore::OptionPairs$new(
                 "pairs",
                 pairs,
@@ -45,7 +45,7 @@ rttestPSOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "ci",
                 ci,
                 default=FALSE)
-        
+
             self$.addOption(private$..pairs)
             self$.addOption(private$..tr)
             self$.addOption(private$..md)
@@ -69,16 +69,15 @@ rttestPSOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 rttestPSResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
-        ttest = function() private$..ttest),
-    private = list(
-        ..ttest = NA),
+        ttest = function() private$.items[["ttest"]]),
+    private = list(),
     public=list(
         initialize=function(options) {
             super$initialize(
                 options=options,
                 name="",
                 title="Robust Paired Samples T-Test")
-            private$..ttest <- jmvcore::Table$new(
+            self$add(jmvcore::Table$new(
                 options=options,
                 name="ttest",
                 title="Robust Paired Samples T-Test",
@@ -127,8 +126,7 @@ rttestPSResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                     list(
                         `name`="es", 
                         `title`="Cohen's d", 
-                        `visible`="(es)")))
-            self$add(private$..ttest)}))
+                        `visible`="(es)"))))}))
 
 rttestPSBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "rttestPSBase",
@@ -156,11 +154,11 @@ rttestPSBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @examples
 #' data(anorexia, package='MASS')
 #' anorexiaFT <- subset(anorexia, subset = Treat == "FT")
-#' 
+#'
 #' rttestPS(anorexiaFT,
 #'          pairs = list(
 #'              list(i1 = 'Prewt', i2 = 'Postwt')))
-#' 
+#'
 #' #
 #' #  ROBUST PAIRED SAMPLES T-TEST
 #' #
@@ -171,18 +169,18 @@ rttestPSBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' #    Prewt    Postwt    -3.83    10.0    0.003
 #' #  ---------------------------------------------
 #' #
-#' 
+#'
 #' @param data the data as a data frame
-#' @param pairs a list of lists specifying the pairs of measurement in 
+#' @param pairs a list of lists specifying the pairs of measurement in
 #'   \code{data}
-#' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of 
-#'   measurements to trim from each end, when using the trim and bootstrap 
-#'   methods 
-#' @param md \code{TRUE} or \code{FALSE} (default), provide means and standard 
-#'   errors 
-#' @param es \code{TRUE} or \code{FALSE} (default), provide effect sizes 
-#' @param ci \code{TRUE} or \code{FALSE} (default), provide confidence 
-#'   intervals 
+#' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of
+#'   measurements to trim from each end, when using the trim and bootstrap
+#'   methods
+#' @param md \code{TRUE} or \code{FALSE} (default), provide means and standard
+#'   errors
+#' @param es \code{TRUE} or \code{FALSE} (default), provide effect sizes
+#' @param ci \code{TRUE} or \code{FALSE} (default), provide confidence
+#'   intervals
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$ttest} \tab \tab \tab \tab \tab the table of t-test results \cr

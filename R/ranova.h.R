@@ -20,7 +20,7 @@ ranovaOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 name='ranova',
                 requiresData=TRUE,
                 ...)
-        
+
             private$..dep <- jmvcore::OptionVariable$new(
                 "dep",
                 dep,
@@ -75,7 +75,7 @@ ranovaOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "maha",
                     "proj"),
                 default="proj")
-        
+
             self$.addOption(private$..dep)
             self$.addOption(private$..factors)
             self$.addOption(private$..method)
@@ -108,18 +108,16 @@ ranovaOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 ranovaResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
-        main = function() private$..main,
-        phs = function() private$..phs),
-    private = list(
-        ..main = NA,
-        ..phs = NA),
+        main = function() private$.items[["main"]],
+        phs = function() private$.items[["phs"]]),
+    private = list(),
     public=list(
         initialize=function(options) {
             super$initialize(
                 options=options,
                 name="",
                 title="Robust ANOVA")
-            private$..main <- jmvcore::Table$new(
+            self$add(jmvcore::Table$new(
                 options=options,
                 name="main",
                 title="Robust ANOVA",
@@ -144,8 +142,8 @@ ranovaResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                         `name`="p", 
                         `title`="p", 
                         `type`="number", 
-                        `format`="zto,pvalue")))
-            private$..phs <- jmvcore::Array$new(
+                        `format`="zto,pvalue"))))
+            self$add(jmvcore::Array$new(
                 options=options,
                 name="phs",
                 title="Post Hoc Tests",
@@ -190,9 +188,7 @@ ranovaResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                             `name`="ciu", 
                             `title`="Upper", 
                             `superTitle`="95% Confidence interval", 
-                            `type`="number"))))
-            self$add(private$..main)
-            self$add(private$..phs)}))
+                            `type`="number")))))}))
 
 ranovaBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "ranovaBase",
@@ -219,12 +215,12 @@ ranovaBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #'
 #' @examples
 #' data('goggles', package='WRS2')
-#' 
+#'
 #' ranova(goggles,
 #'        dep = 'attractiveness',
 #'        factors = c('gender', 'alcohol'),
 #'        ph = TRUE)
-#' 
+#'
 #' #
 #' #  ROBUST ANOVA
 #' #
@@ -259,24 +255,24 @@ ranovaBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' #    2 Pints    4 Pints     39.17     < .001     22.5     55.9
 #' #  -------------------------------------------------------------
 #' #
-#' 
+#'
 #' @param data the data as a data frame
-#' @param dep a string naming the dependent variable from \code{data}; the 
-#'   variable must be numeric 
-#' @param factors a vector of strings naming the fixed factors from 
+#' @param dep a string naming the dependent variable from \code{data}; the
+#'   variable must be numeric
+#' @param factors a vector of strings naming the fixed factors from
 #'   \code{data}
-#' @param method \code{'median'}, \code{'trim'} (default) or \code{'boot'}; 
-#'   the method to use, median, trimmed means, or bootstrapped 
-#' @param ph \code{TRUE} or \code{FALSE} (default), provide post hoc tests 
-#' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of 
-#'   measurements to trim from each end, when using the trim and bootstrap 
-#'   methods 
-#' @param est \code{'onestep'}, \code{'mom'} (default) or \code{'median'}, the 
-#'   M-estimator to use; One-step, Modified one-step or Median respectively 
-#' @param nboot a number (default: 599) specifying the number of bootstrap 
-#'   samples to use when using the bootstrap method 
-#' @param dist \code{'maha'} or \code{'proj'} (default), whether to use 
-#'   Mahalanobis or Projection distances respectively 
+#' @param method \code{'median'}, \code{'trim'} (default) or \code{'boot'};
+#'   the method to use, median, trimmed means, or bootstrapped
+#' @param ph \code{TRUE} or \code{FALSE} (default), provide post hoc tests
+#' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of
+#'   measurements to trim from each end, when using the trim and bootstrap
+#'   methods
+#' @param est \code{'onestep'}, \code{'mom'} (default) or \code{'median'}, the
+#'   M-estimator to use; One-step, Modified one-step or Median respectively
+#' @param nboot a number (default: 599) specifying the number of bootstrap
+#'   samples to use when using the bootstrap method
+#' @param dist \code{'maha'} or \code{'proj'} (default), whether to use
+#'   Mahalanobis or Projection distances respectively
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$main} \tab \tab \tab \tab \tab the table of ANOVA results \cr

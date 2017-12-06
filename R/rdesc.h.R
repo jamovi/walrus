@@ -22,7 +22,7 @@ rdescOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 name='rdesc',
                 requiresData=TRUE,
                 ...)
-        
+
             private$..vars <- jmvcore::OptionVariables$new(
                 "vars",
                 vars,
@@ -78,7 +78,7 @@ rdescOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "med",
                 med,
                 default=FALSE)
-        
+
             self$.addOption(private$..vars)
             self$.addOption(private$..splitBy)
             self$.addOption(private$..mean)
@@ -117,16 +117,15 @@ rdescOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 rdescResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
-        table = function() private$..table),
-    private = list(
-        ..table = NA),
+        table = function() private$.items[["table"]]),
+    private = list(),
     public=list(
         initialize=function(options) {
             super$initialize(
                 options=options,
                 name="",
                 title="Robust Descriptives")
-            private$..table <- jmvcore::Table$new(
+            self$add(jmvcore::Table$new(
                 options=options,
                 name="table",
                 title="Robust Descriptives",
@@ -215,8 +214,7 @@ rdescResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                     list(
                         `name`="se[med]", 
                         `title`="SE", 
-                        `visible`="(med)")))
-            self$add(private$..table)}))
+                        `visible`="(med)"))))}))
 
 rdescBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "rdescBase",
@@ -244,16 +242,16 @@ rdescBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @examples
 #' 
 #' data('eurosoccer', package='WRS2')
-#' 
+#'
 #' SpainGermany <- subset(eurosoccer, eurosoccer$League == 'Spain' | eurosoccer$League == 'Germany')
 #' SpainGermany <- droplevels(SpainGermany)
-#' 
+#'
 #' walrus::rdesc(
 #'     data = SpainGermany,
 #'     vars = "GoalsGame",
 #'     splitBy = "League",
 #'     med = TRUE)
-#' 
+#'
 #' #
 #' #  ROBUST DESCRIPTIVES
 #' #
@@ -270,26 +268,26 @@ rdescBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' #                            Median          1.30    0.0766
 #' #  ----------------------------------------------------------
 #' #
-#' 
+#'
 #' @param data the data as a data frame
-#' @param vars a vector of strings naming the variables in \code{data} of 
+#' @param vars a vector of strings naming the variables in \code{data} of
 #'   interest
-#' @param splitBy a string naming the variable in \code{data} to split the 
+#' @param splitBy a string naming the variable in \code{data} to split the
 #'   data by
-#' @param mean \code{TRUE} (default) or \code{FALSE}, provide a 'normal' 
-#'   arithmetic mean 
-#' @param trim \code{TRUE} (default) or \code{FALSE}, provide a trimmed mean 
-#' @param tr a number between 0 and 0.5 (default: 0.2); the proportion of 
-#'   measurements to trim from each end when producing trimmed means 
-#' @param win \code{TRUE} or \code{FALSE} (default), provide a 'Winsorized' 
-#'   mean 
-#' @param wl a number between 0 and 0.5 (default: 0.2); the level of 
-#'   'winsorizing' when producing winsorized means 
-#' @param mest \code{TRUE} or \code{FALSE} (default), provide an 'M-estimated' 
-#'   value 
-#' @param bend a number (default: 1.28), the bending constant to use when 
-#'   using M-estimators 
-#' @param med \code{TRUE} or \code{FALSE} (default), provide medians 
+#' @param mean \code{TRUE} (default) or \code{FALSE}, provide a 'normal'
+#'   arithmetic mean
+#' @param trim \code{TRUE} (default) or \code{FALSE}, provide a trimmed mean
+#' @param tr a number between 0 and 0.5 (default: 0.2); the proportion of
+#'   measurements to trim from each end when producing trimmed means
+#' @param win \code{TRUE} or \code{FALSE} (default), provide a 'Winsorized'
+#'   mean
+#' @param wl a number between 0 and 0.5 (default: 0.2); the level of
+#'   'winsorizing' when producing winsorized means
+#' @param mest \code{TRUE} or \code{FALSE} (default), provide an 'M-estimated'
+#'   value
+#' @param bend a number (default: 1.28), the bending constant to use when
+#'   using M-estimators
+#' @param med \code{TRUE} or \code{FALSE} (default), provide medians
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$table} \tab \tab \tab \tab \tab the table of descriptives \cr

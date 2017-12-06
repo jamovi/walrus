@@ -18,7 +18,7 @@ rplotsOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 name='rplots',
                 requiresData=TRUE,
                 ...)
-        
+
             private$..vars <- jmvcore::OptionVariables$new(
                 "vars",
                 vars,
@@ -57,7 +57,7 @@ rplotsOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "jitter",
                     "stack"),
                 default="stack")
-        
+
             self$.addOption(private$..vars)
             self$.addOption(private$..splitBy)
             self$.addOption(private$..violin)
@@ -84,16 +84,15 @@ rplotsOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 rplotsResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
-        plots = function() private$..plots),
-    private = list(
-        ..plots = NA),
+        plots = function() private$.items[["plots"]]),
+    private = list(),
     public=list(
         initialize=function(options) {
             super$initialize(
                 options=options,
                 name="",
                 title="Box & Violin Plots")
-            private$..plots <- jmvcore::Array$new(
+            self$add(jmvcore::Array$new(
                 options=options,
                 name="plots",
                 title="Plots",
@@ -107,8 +106,7 @@ rplotsResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                         "violin",
                         "boxplot",
                         "dot",
-                        "dotType")))
-            self$add(private$..plots)}))
+                        "dotType"))))}))
 
 rplotsBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "rplotsBase",
@@ -135,17 +133,17 @@ rplotsBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #'
 #' @examples
 #' data('eurosoccer', package='WRS2')
-#' 
+#'
 #' # violin plots
-#' 
+#'
 #' walrus::rplots(
 #'     data = eurosoccer,
 #'     vars = "GoalsGame",
 #'     splitBy = "League")
-#' 
-#' 
+#'
+#'
 #' # box plots
-#' 
+#'
 #' walrus::rplots(
 #'     data = eurosoccer,
 #'     vars = "GoalsGame",
@@ -153,18 +151,18 @@ rplotsBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #'     violin = FALSE,
 #'     boxplot = TRUE,
 #'     dot = FALSE)
-#' 
+#'
 #' @param data the data as a data frame
-#' @param vars a vector of strings naming the variables in \code{data} of 
+#' @param vars a vector of strings naming the variables in \code{data} of
 #'   interest
-#' @param splitBy a string naming the variable in \code{data} to split the 
+#' @param splitBy a string naming the variable in \code{data} to split the
 #'   data by
-#' @param violin \code{TRUE} (default) or \code{FALSE}, provide violin plots 
-#' @param boxplot \code{TRUE} or \code{FALSE} (default), provide box plots 
-#' @param dot \code{TRUE} (default) or \code{FALSE}, plot each measurement as 
-#'   a dot 
-#' @param dotType \code{'jitter'} or \code{'stack'} (default); whether data 
-#'   dots are jittered or stacked 
+#' @param violin \code{TRUE} (default) or \code{FALSE}, provide violin plots
+#' @param boxplot \code{TRUE} or \code{FALSE} (default), provide box plots
+#' @param dot \code{TRUE} (default) or \code{FALSE}, plot each measurement as
+#'   a dot
+#' @param dotType \code{'jitter'} or \code{'stack'} (default); whether data
+#'   dots are jittered or stacked
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$plots} \tab \tab \tab \tab \tab an array of images \cr

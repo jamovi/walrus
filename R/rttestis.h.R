@@ -24,7 +24,7 @@ rttestISOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 name='rttestIS',
                 requiresData=TRUE,
                 ...)
-        
+
             private$..deps <- jmvcore::OptionVariables$new(
                 "deps",
                 deps,
@@ -91,7 +91,7 @@ rttestISOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 "esci",
                 esci,
                 default=FALSE)
-        
+
             self$.addOption(private$..deps)
             self$.addOption(private$..group)
             self$.addOption(private$..yuen)
@@ -136,16 +136,15 @@ rttestISOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 rttestISResults <- if (requireNamespace('jmvcore')) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
-        ttest = function() private$..ttest),
-    private = list(
-        ..ttest = NA),
+        ttest = function() private$.items[["ttest"]]),
+    private = list(),
     public=list(
         initialize=function(options) {
             super$initialize(
                 options=options,
                 name="",
                 title="Robust Independent Samples T-Test")
-            private$..ttest <- jmvcore::Table$new(
+            self$add(jmvcore::Table$new(
                 options=options,
                 name="ttest",
                 title="Robust Independent Samples T-Test",
@@ -260,8 +259,7 @@ rttestISResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                         `title`="p", 
                         `type`="number", 
                         `format`="zto,pvalue", 
-                        `visible`="(mest)")))
-            self$add(private$..ttest)}))
+                        `visible`="(mest)"))))}))
 
 rttestISBase <- if (requireNamespace('jmvcore')) R6::R6Class(
     "rttestISBase",
@@ -288,16 +286,16 @@ rttestISBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #'
 #' @examples
 #' data('eurosoccer', package='WRS2')
-#' 
+#'
 #' SpainGermany <- subset(eurosoccer, eurosoccer$League == 'Spain' | eurosoccer$League == 'Germany')
 #' SpainGermany <- droplevels(SpainGermany)
-#' 
+#'
 #' rttestIS(SpainGermany,
 #'          dep = 'GoalsScored',
 #'          group = 'League',
 #'          yuen = TRUE,
 #'          mest = TRUE)
-#' 
+#'
 #' #
 #' #  ROBUST INDEPENDENT SAMPLES T-TEST
 #' #
@@ -309,31 +307,31 @@ rttestISBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' #                   M-estimator    -0.933            0.993
 #' #  ---------------------------------------------------------
 #' #
-#' 
+#'
 #' @param data the data as a data frame
-#' @param deps a vector of strings naming the dependent variables in 
+#' @param deps a vector of strings naming the dependent variables in
 #'   \code{data}
-#' @param group a string naming the grouping variable in \code{data}; must 
+#' @param group a string naming the grouping variable in \code{data}; must
 #'   have 2 levels
-#' @param yuen \code{TRUE} (default) or \code{FALSE}, use the Yuen's trim 
-#'   method 
-#' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of 
-#'   measurements to trim from each end, when using the trim and bootstrap 
-#'   methods 
-#' @param mest \code{TRUE} or \code{FALSE} (default), use an M-estimator 
-#' @param method \code{'onestep'}, \code{'mom'} (default) or \code{'median'}, 
-#'   the M-estimator to use; One-step, Modified one-step or Median respectively 
-#' @param yuenbt \code{TRUE} or \code{FALSE} (default), use the Yuen's 
-#'   bootstrap method 
-#' @param nboot a number (default: 599) specifying the number of bootstrap 
-#'   samples to use when using the bootstrap method 
-#' @param md \code{TRUE} or \code{FALSE} (default), provide the mean 
-#'   difference 
-#' @param ci \code{TRUE} or \code{FALSE} (default), provide a 95\% confidence 
-#'   interval on the mean difference 
-#' @param es \code{TRUE} or \code{FALSE} (default), provide the effect-size 
-#' @param esci \code{TRUE} or \code{FALSE} (default), provide a 95\% 
-#'   confidence interval on the effect-size 
+#' @param yuen \code{TRUE} (default) or \code{FALSE}, use the Yuen's trim
+#'   method
+#' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of
+#'   measurements to trim from each end, when using the trim and bootstrap
+#'   methods
+#' @param mest \code{TRUE} or \code{FALSE} (default), use an M-estimator
+#' @param method \code{'onestep'}, \code{'mom'} (default) or \code{'median'},
+#'   the M-estimator to use; One-step, Modified one-step or Median respectively
+#' @param yuenbt \code{TRUE} or \code{FALSE} (default), use the Yuen's
+#'   bootstrap method
+#' @param nboot a number (default: 599) specifying the number of bootstrap
+#'   samples to use when using the bootstrap method
+#' @param md \code{TRUE} or \code{FALSE} (default), provide the mean
+#'   difference
+#' @param ci \code{TRUE} or \code{FALSE} (default), provide a 95\% confidence
+#'   interval on the mean difference
+#' @param es \code{TRUE} or \code{FALSE} (default), provide the effect-size
+#' @param esci \code{TRUE} or \code{FALSE} (default), provide a 95\%
+#'   confidence interval on the effect-size
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$ttest} \tab \tab \tab \tab \tab the table of t-test results \cr
