@@ -1,7 +1,7 @@
 title: Robust Independent Samples T-Test
 name: rttestIS
 jus: '2.0'
-stage: 0
+compilerMode: tame
 children:
   - type: VariableSupplier
     persistentItems: false
@@ -36,52 +36,72 @@ children:
                 template:
                   type: VariableLabel
             isTarget: true
-  - type: Label
-    label: Yuen's
+  - type: LayoutBox
+    margin: large
     stretchFactor: 1
     children:
-      - type: CheckBox
-        name: yuen
+      - type: Label
         label: Yuen's
+        stretchFactor: 1
         children:
-          - name: tr
-            type: TextBox
-            label: Trim proportion
-            format: number
-            inputPattern: '[0-9]+'
           - type: CheckBox
-            name: yuenbt
-            label: Bootstrap
+            name: yuen
+            label: Yuen's
             children:
-              - type: TextBox
-                name: nboot
-                label: Samples
+              - name: tr
+                type: TextBox
+                label: Trim proportion
                 format: number
                 inputPattern: '[0-9]+'
-          - name: md
-            type: CheckBox
-            label: Mean difference
-          - name: ci
-            type: CheckBox
-            label: Confidence interval
-          - name: es
-            type: CheckBox
-            label: Effect-size
-            children:
-              - name: esci
+              - type: CheckBox
+                name: yuenbt
+                label: Bootstrap
+                children:
+                  - type: TextBox
+                    name: nboot
+                    label: Samples
+                    format: number
+                    inputPattern: '[0-9]+'
+              - name: md
+                type: CheckBox
+                label: Mean difference
+              - name: ci
                 type: CheckBox
                 label: Confidence interval
-  - type: Label
-    label: M-estimator
+              - name: es
+                type: CheckBox
+                label: Effect-size
+                children:
+                  - name: esci
+                    type: CheckBox
+                    label: Confidence interval
+  - type: LayoutBox
+    margin: large
     cell:
       row: 1
       column: 1
     stretchFactor: 1
     children:
-      - type: CheckBox
-        name: mest
+      - type: Label
         label: M-estimator
         children:
-          - name: method
-            type: ComboBox
-            label: Method
+          - type: CheckBox
+            name: mest
+            label: M-estimator
+            children:
+              - name: method
+                type: ComboBox
+                label: Method
+      - type: Label
+        label: Groups
+        children:
+          - type: LevelSelector
+            name: g1
+            label: Group 1
+            optionName: groups
+            valueKey: [0]
+          - type: LevelSelector
+            name: g2
+            label: Group 2
+            optionName: groups
+            valueKey: [1]

@@ -11,6 +11,7 @@ items:
       rows: (deps)
       clearWith:
         - group
+        - groups
         - method
         - tr
         - nboot

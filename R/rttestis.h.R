@@ -8,6 +8,7 @@ rttestISOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
         initialize = function(
             deps = NULL,
             group = NULL,
+            groups = NULL,
             yuen = TRUE,
             tr = 0.2,
             mest = FALSE,
@@ -43,6 +44,14 @@ rttestISOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                     "nominal",
                     "ordinal",
                     "nominaltext"))
+            private$..groups <- jmvcore::OptionArray$new(
+                "groups",
+                groups,
+                default=NULL,
+                template=jmvcore::OptionLevel$new(
+                    "groups",
+                    NULL,
+                    variable="(group)"))
             private$..yuen <- jmvcore::OptionBool$new(
                 "yuen",
                 yuen,
@@ -94,6 +103,7 @@ rttestISOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
 
             self$.addOption(private$..deps)
             self$.addOption(private$..group)
+            self$.addOption(private$..groups)
             self$.addOption(private$..yuen)
             self$.addOption(private$..tr)
             self$.addOption(private$..mest)
@@ -108,6 +118,7 @@ rttestISOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
     active = list(
         deps = function() private$..deps$value,
         group = function() private$..group$value,
+        groups = function() private$..groups$value,
         yuen = function() private$..yuen$value,
         tr = function() private$..tr$value,
         mest = function() private$..mest$value,
@@ -121,6 +132,7 @@ rttestISOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
     private = list(
         ..deps = NA,
         ..group = NA,
+        ..groups = NA,
         ..yuen = NA,
         ..tr = NA,
         ..mest = NA,
@@ -151,6 +163,7 @@ rttestISResults <- if (requireNamespace('jmvcore')) R6::R6Class(
                 rows="(deps)",
                 clearWith=list(
                     "group",
+                    "groups",
                     "method",
                     "tr",
                     "nboot"),
@@ -287,12 +300,10 @@ rttestISBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @examples
 #' data('eurosoccer', package='WRS2')
 #'
-#' SpainGermany <- subset(eurosoccer, eurosoccer$League == 'Spain' | eurosoccer$League == 'Germany')
-#' SpainGermany <- droplevels(SpainGermany)
-#'
-#' rttestIS(SpainGermany,
+#' rttestIS(eurosoccer,
 #'          dep = 'GoalsScored',
 #'          group = 'League',
+#'          groups = c('Spain', 'Germany'),
 #'          yuen = TRUE,
 #'          mest = TRUE)
 #'
@@ -311,8 +322,9 @@ rttestISBase <- if (requireNamespace('jmvcore')) R6::R6Class(
 #' @param data the data as a data frame
 #' @param deps a vector of strings naming the dependent variables in
 #'   \code{data}
-#' @param group a string naming the grouping variable in \code{data}; must
-#'   have 2 levels
+#' @param group a string naming the grouping variable in \code{data}
+#' @param groups a vector (of length 2) of strings naming the levels
+#'   representing the groups in the grouping variable
 #' @param yuen \code{TRUE} (default) or \code{FALSE}, use the Yuen's trim
 #'   method
 #' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of
@@ -348,6 +360,7 @@ rttestIS <- function(
     data,
     deps,
     group,
+    groups = NULL,
     yuen = TRUE,
     tr = 0.2,
     mest = FALSE,
@@ -365,6 +378,7 @@ rttestIS <- function(
     options <- rttestISOptions$new(
         deps = deps,
         group = group,
+        groups = groups,
         yuen = yuen,
         tr = tr,
         mest = mest,

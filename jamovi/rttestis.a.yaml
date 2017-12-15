@@ -14,12 +14,10 @@ description:
         usage: |
             data('eurosoccer', package='WRS2')
 
-            SpainGermany <- subset(eurosoccer, eurosoccer$League == 'Spain' | eurosoccer$League == 'Germany')
-            SpainGermany <- droplevels(SpainGermany)
-
-            rttestIS(SpainGermany,
+            rttestIS(eurosoccer,
                      dep = 'GoalsScored',
                      group = 'League',
+                     groups = c('Spain', 'Germany'),
                      yuen = TRUE,
                      mest = TRUE)
 
@@ -58,13 +56,25 @@ options:
       title: Grouping Variable
       type: Variable
       description:
-          R: a string naming the grouping variable in `data`; must have 2 levels
+          R: a string naming the grouping variable in `data`
       suggested:
         - nominal
       permitted:
         - nominal
         - ordinal
         - nominaltext
+
+    - name: groups
+      title: Groups
+      type: Array
+      default: null
+      template:
+          type: Level
+          variable: (group)
+      description:
+          R: >
+            a vector (of length 2) of strings naming the levels representing the
+            groups in the grouping variable
 
     - name: yuen
       title: Yuen's

@@ -23,18 +23,51 @@ rttestISClass <- R6::R6Class(
         },
         .run = function() {
 
-            group <- self$options$group
-            deps  <- self$options$deps
-            all   <- c(group, deps)
+            group  <- self$options$group
+            deps   <- self$options$deps
+            all    <- c(group, deps)
 
             if (is.null(group) || length(deps) == 0)
                 return()
 
+            groups <- self$options$groups
             trim <- self$options$tr
 
             data <- self$data
             for (dep in deps)
                 data[[dep]] <- jmvcore::toNumeric(data[[dep]])
+            data[[group]] <- as.factor(data[[group]])
+
+            levels <- levels(data[[group]])
+            nlevels <- nlevels(data[[group]])
+
+            if (nlevels < 2)
+                reject('Grouping variable must contain at least two groups')
+            if (length(groups) > 2)
+                reject('Only two groups may be specified')
+            if (length(groups) == 1)
+                reject('Two groups must be specified')
+            if (nlevels == 2 && length(groups) == 0)
+                groups <- levels
+            if (nlevels > 2 && length(groups) < 2)
+                reject('Grouping variable contains more than two groups, you must specify the groups of interest')
+            if (groups[1] == groups[2])
+                reject('Group 1 may not be the same as Group 2')
+            if ( ! groups[1] %in% levels)
+                reject("Group '{group}' does not exist in '{variable}'", group=groups[1], variable=group)
+            if ( ! groups[2] %in% levels)
+                reject("Group '{group}' does not exist in '{variable}'", group=groups[2], variable=group)
+
+            data <- subset(data, (data[[group]] == groups[1]) | (data[[group]] == groups[2]))
+            data <- droplevels(data)
+
+            if (is.unsorted(match(groups, levels))) {
+                groupVar <- as.numeric(data[[group]])
+                groupVar[groupVar == 1] <- 3
+                groupVar[groupVar == 2] <- 1
+                groupVar[groupVar == 3] <- 2
+                data[[group]] <- groupVar
+            }
 
             ttestTable <- self$results$ttest
 
@@ -45,8 +78,9 @@ rttestISClass <- R6::R6Class(
                 res <- try(WRS2::yuen(fmla, data, tr=trim))
 
                 if ( ! jmvcore::isError(res)) {
+                    mult <- ifelse(res$diff >= 0, 1, -1)
                     ttestTable$setRow(rowKey=dep, values=list(
-                        `t[yuen]`=res$test,
+                        `t[yuen]`=res$test * mult,
                         `df[yuen]`=res$df,
                         `p[yuen]`=res$p.value,
                         `md[yuen]`=res$diff,
