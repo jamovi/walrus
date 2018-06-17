@@ -10,28 +10,28 @@ ranova(data, dep, factors = NULL, method = "trim", ph = FALSE, tr = 0.2,
 \arguments{
 \item{data}{the data as a data frame}
 
-\item{dep}{a string naming the dependent variable from \code{data}; the 
+\item{dep}{a string naming the dependent variable from \code{data}; the
 variable must be numeric}
 
-\item{factors}{a vector of strings naming the fixed factors from 
+\item{factors}{a vector of strings naming the fixed factors from
 \code{data}}
 
-\item{method}{\code{'median'}, \code{'trim'} (default) or \code{'boot'}; 
+\item{method}{\code{'median'}, \code{'trim'} (default) or \code{'boot'};
 the method to use, median, trimmed means, or bootstrapped}
 
 \item{ph}{\code{TRUE} or \code{FALSE} (default), provide post hoc tests}
 
-\item{tr}{a number between 0 and 0.5, (default: 0.2), the proportion of 
-measurements to trim from each end, when using the trim and bootstrap 
+\item{tr}{a number between 0 and 0.5, (default: 0.2), the proportion of
+measurements to trim from each end, when using the trim and bootstrap
 methods}
 
-\item{est}{\code{'onestep'}, \code{'mom'} (default) or \code{'median'}, the 
+\item{est}{\code{'onestep'}, \code{'mom'} (default) or \code{'median'}, the
 M-estimator to use; One-step, Modified one-step or Median respectively}
 
-\item{nboot}{a number (default: 599) specifying the number of bootstrap 
+\item{nboot}{a number (default: 599) specifying the number of bootstrap
 samples to use when using the bootstrap method}
 
-\item{dist}{\code{'maha'} or \code{'proj'} (default), whether to use 
+\item{dist}{\code{'maha'} or \code{'proj'} (default), whether to use
 Mahalanobis or Projection distances respectively}
 }
 \value{

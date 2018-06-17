@@ -4,7 +4,7 @@ title: Robust Paired Samples T-Test
 menuGroup: Walrus
 menuSubgroup: T-Tests
 version: '1.0.0'
-jas: '1.1'
+jas: '1.2'
 
 description:
     main: Robust Paired Samples T-Test
@@ -44,9 +44,7 @@ options:
       suggested:
         - continuous
       permitted:
-        - continuous
-        - nominal
-        - ordinal
+        - numeric
       description:
           R: a list of lists specifying the pairs of measurement in `data`
 

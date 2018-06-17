@@ -31,18 +31,14 @@ rttestISOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 suggested=list(
                     "continuous"),
                 permitted=list(
-                    "nominal",
-                    "ordinal",
-                    "continuous"))
+                    "numeric"))
             private$..group <- jmvcore::OptionVariable$new(
                 "group",
                 group,
                 suggested=list(
                     "nominal"),
                 permitted=list(
-                    "nominal",
-                    "ordinal",
-                    "nominaltext"))
+                    "factor"))
             private$..yuen <- jmvcore::OptionBool$new(
                 "yuen",
                 yuen,

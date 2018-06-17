@@ -10,7 +10,7 @@ A toolbox of common robust statistical tests, including robust
 descriptives, robust t-tests, and robust ANOVA. It is also available as a
 module for 'jamovi' (see \href{https://www.jamovi.org}{www.jamovi.org} for
 more information).
-Walrus is based on the \code{\link[WRS2]{WRS2}} package by Patrick Mair, which is in turn based on
+Walrus is based on the \code{WRS2} package by Patrick Mair, which is in turn based on
 the scripts and work of Rand Wilcox. These analyses are described in depth in
 the book \href{https://www.amazon.com/Introduction-Estimation-Hypothesis-Statistical-Modeling/dp/012804733X}{Introduction to Robust Estimation & Hypothesis Testing}.
 }
@@ -26,7 +26,7 @@ the book \href{https://www.amazon.com/Introduction-Estimation-Hypothesis-Statist
 \preformatted{
 Ravi:
     "Should we create a logo for walrus?"
-    
+
 Jonathon:
     "Yeah, I guess. Maybe a walrus, or a
     skewed distribution?

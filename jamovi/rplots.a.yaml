@@ -3,7 +3,7 @@ name:  rplots
 title: Box & Violin Plots
 menuGroup: Walrus
 version: '1.0.0'
-jas: '1.1'
+jas: '1.2'
 
 description:
     main: Box & Violin Plots
@@ -42,9 +42,7 @@ options:
       suggested:
         - continuous
       permitted:
-        - continuous
-        - nominal
-        - ordinal
+        - numeric
       description:
           R: a vector of strings naming the variables in `data` of interest
 
@@ -55,9 +53,7 @@ options:
       suggested:
         - nominal
       permitted:
-        - nominal
-        - ordinal
-        - nominaltext
+        - factor
       description:
           R: a string naming the variable in `data` to split the data by
 

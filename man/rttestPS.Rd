@@ -9,19 +9,19 @@ rttestPS(data, pairs, tr = 0.2, md = FALSE, es = FALSE, ci = FALSE)
 \arguments{
 \item{data}{the data as a data frame}
 
-\item{pairs}{a list of lists specifying the pairs of measurement in 
+\item{pairs}{a list of lists specifying the pairs of measurement in
 \code{data}}
 
-\item{tr}{a number between 0 and 0.5, (default: 0.2), the proportion of 
-measurements to trim from each end, when using the trim and bootstrap 
+\item{tr}{a number between 0 and 0.5, (default: 0.2), the proportion of
+measurements to trim from each end, when using the trim and bootstrap
 methods}
 
-\item{md}{\code{TRUE} or \code{FALSE} (default), provide means and standard 
+\item{md}{\code{TRUE} or \code{FALSE} (default), provide means and standard
 errors}
 
 \item{es}{\code{TRUE} or \code{FALSE} (default), provide effect sizes}
 
-\item{ci}{\code{TRUE} or \code{FALSE} (default), provide confidence 
+\item{ci}{\code{TRUE} or \code{FALSE} (default), provide confidence
 intervals}
 }
 \value{

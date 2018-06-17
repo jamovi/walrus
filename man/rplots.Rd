@@ -10,20 +10,20 @@ rplots(data, vars, splitBy = NULL, violin = TRUE, boxplot = FALSE,
 \arguments{
 \item{data}{the data as a data frame}
 
-\item{vars}{a vector of strings naming the variables in \code{data} of 
+\item{vars}{a vector of strings naming the variables in \code{data} of
 interest}
 
-\item{splitBy}{a string naming the variable in \code{data} to split the 
+\item{splitBy}{a string naming the variable in \code{data} to split the
 data by}
 
 \item{violin}{\code{TRUE} (default) or \code{FALSE}, provide violin plots}
 
 \item{boxplot}{\code{TRUE} or \code{FALSE} (default), provide box plots}
 
-\item{dot}{\code{TRUE} (default) or \code{FALSE}, plot each measurement as 
+\item{dot}{\code{TRUE} (default) or \code{FALSE}, plot each measurement as
 a dot}
 
-\item{dotType}{\code{'jitter'} or \code{'stack'} (default); whether data 
+\item{dotType}{\code{'jitter'} or \code{'stack'} (default); whether data
 dots are jittered or stacked}
 }
 \value{

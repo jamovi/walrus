@@ -3,7 +3,7 @@ name:  rttestIS
 title: Robust Independent Samples T-Test
 menuGroup: Walrus
 version: '1.0.0'
-jas: '1.1'
+jas: '1.2'
 
 completeWhenFilled: true
 
@@ -50,9 +50,7 @@ options:
       suggested:
         - continuous
       permitted:
-        - nominal
-        - ordinal
-        - continuous
+        - numeric
 
     - name: group
       title: Grouping Variable
@@ -62,9 +60,7 @@ options:
       suggested:
         - nominal
       permitted:
-        - nominal
-        - ordinal
-        - nominaltext
+        - factor
 
     - name: yuen
       title: Yuen's

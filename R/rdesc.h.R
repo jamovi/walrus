@@ -29,9 +29,7 @@ rdescOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 suggested=list(
                     "continuous"),
                 permitted=list(
-                    "continuous",
-                    "nominal",
-                    "ordinal"))
+                    "numeric"))
             private$..splitBy <- jmvcore::OptionVariable$new(
                 "splitBy",
                 splitBy,
@@ -39,9 +37,7 @@ rdescOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 suggested=list(
                     "nominal"),
                 permitted=list(
-                    "nominal",
-                    "ordinal",
-                    "nominaltext"))
+                    "factor"))
             private$..mean <- jmvcore::OptionBool$new(
                 "mean",
                 mean,

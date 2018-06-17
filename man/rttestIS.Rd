@@ -11,39 +11,39 @@ rttestIS(data, deps, group, yuen = TRUE, tr = 0.2, mest = FALSE,
 \arguments{
 \item{data}{the data as a data frame}
 
-\item{deps}{a vector of strings naming the dependent variables in 
+\item{deps}{a vector of strings naming the dependent variables in
 \code{data}}
 
-\item{group}{a string naming the grouping variable in \code{data}; must 
+\item{group}{a string naming the grouping variable in \code{data}; must
 have 2 levels}
 
-\item{yuen}{\code{TRUE} (default) or \code{FALSE}, use the Yuen's trim 
+\item{yuen}{\code{TRUE} (default) or \code{FALSE}, use the Yuen's trim
 method}
 
-\item{tr}{a number between 0 and 0.5, (default: 0.2), the proportion of 
-measurements to trim from each end, when using the trim and bootstrap 
+\item{tr}{a number between 0 and 0.5, (default: 0.2), the proportion of
+measurements to trim from each end, when using the trim and bootstrap
 methods}
 
 \item{mest}{\code{TRUE} or \code{FALSE} (default), use an M-estimator}
 
-\item{method}{\code{'onestep'}, \code{'mom'} (default) or \code{'median'}, 
+\item{method}{\code{'onestep'}, \code{'mom'} (default) or \code{'median'},
 the M-estimator to use; One-step, Modified one-step or Median respectively}
 
-\item{yuenbt}{\code{TRUE} or \code{FALSE} (default), use the Yuen's 
+\item{yuenbt}{\code{TRUE} or \code{FALSE} (default), use the Yuen's
 bootstrap method}
 
-\item{nboot}{a number (default: 599) specifying the number of bootstrap 
+\item{nboot}{a number (default: 599) specifying the number of bootstrap
 samples to use when using the bootstrap method}
 
-\item{md}{\code{TRUE} or \code{FALSE} (default), provide the mean 
+\item{md}{\code{TRUE} or \code{FALSE} (default), provide the mean
 difference}
 
-\item{ci}{\code{TRUE} or \code{FALSE} (default), provide a 95\% confidence 
+\item{ci}{\code{TRUE} or \code{FALSE} (default), provide a 95\% confidence
 interval on the mean difference}
 
 \item{es}{\code{TRUE} or \code{FALSE} (default), provide the effect-size}
 
-\item{esci}{\code{TRUE} or \code{FALSE} (default), provide a 95\% 
+\item{esci}{\code{TRUE} or \code{FALSE} (default), provide a 95\%
 confidence interval on the effect-size}
 }
 \value{

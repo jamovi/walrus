@@ -25,9 +25,7 @@ rplotsOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 suggested=list(
                     "continuous"),
                 permitted=list(
-                    "continuous",
-                    "nominal",
-                    "ordinal"))
+                    "numeric"))
             private$..splitBy <- jmvcore::OptionVariable$new(
                 "splitBy",
                 splitBy,
@@ -35,9 +33,7 @@ rplotsOptions <- if (requireNamespace('jmvcore')) R6::R6Class(
                 suggested=list(
                     "nominal"),
                 permitted=list(
-                    "nominal",
-                    "ordinal",
-                    "nominaltext"))
+                    "factor"))
             private$..violin <- jmvcore::OptionBool$new(
                 "violin",
                 violin,

@@ -4,7 +4,7 @@ title: Robust ANOVA
 menuGroup: Walrus
 menuSubgroup: ANOVAs
 version: '1.0.0'
-jas: '1.1'
+jas: '1.2'
 
 description:
     main: Robust Analysis of Variance
@@ -67,9 +67,7 @@ options:
       suggested:
         - continuous
       permitted:
-        - continuous
-        - nominal
-        - ordinal
+        - numeric
       description:
           R: >
             a string naming the dependent variable from `data`; the variable
@@ -81,6 +79,8 @@ options:
       suggested:
         - nominal
         - ordinal
+      permitted:
+        - factor
       default:
       description:
           R: a vector of strings naming the fixed factors from `data`

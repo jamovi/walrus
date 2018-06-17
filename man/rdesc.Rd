@@ -10,30 +10,30 @@ rdesc(data, vars, splitBy = NULL, mean = TRUE, trim = TRUE, tr = 0.2,
 \arguments{
 \item{data}{the data as a data frame}
 
-\item{vars}{a vector of strings naming the variables in \code{data} of 
+\item{vars}{a vector of strings naming the variables in \code{data} of
 interest}
 
-\item{splitBy}{a string naming the variable in \code{data} to split the 
+\item{splitBy}{a string naming the variable in \code{data} to split the
 data by}
 
-\item{mean}{\code{TRUE} (default) or \code{FALSE}, provide a 'normal' 
+\item{mean}{\code{TRUE} (default) or \code{FALSE}, provide a 'normal'
 arithmetic mean}
 
 \item{trim}{\code{TRUE} (default) or \code{FALSE}, provide a trimmed mean}
 
-\item{tr}{a number between 0 and 0.5 (default: 0.2); the proportion of 
+\item{tr}{a number between 0 and 0.5 (default: 0.2); the proportion of
 measurements to trim from each end when producing trimmed means}
 
-\item{win}{\code{TRUE} or \code{FALSE} (default), provide a 'Winsorized' 
+\item{win}{\code{TRUE} or \code{FALSE} (default), provide a 'Winsorized'
 mean}
 
-\item{wl}{a number between 0 and 0.5 (default: 0.2); the level of 
+\item{wl}{a number between 0 and 0.5 (default: 0.2); the level of
 'winsorizing' when producing winsorized means}
 
-\item{mest}{\code{TRUE} or \code{FALSE} (default), provide an 'M-estimated' 
+\item{mest}{\code{TRUE} or \code{FALSE} (default), provide an 'M-estimated'
 value}
 
-\item{bend}{a number (default: 1.28), the bending constant to use when 
+\item{bend}{a number (default: 1.28), the bending constant to use when
 using M-estimators}
 
 \item{med}{\code{TRUE} or \code{FALSE} (default), provide medians}
