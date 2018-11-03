@@ -358,6 +358,12 @@ rttestIS <- function(
     if ( ! requireNamespace('jmvcore'))
         stop('rttestIS requires jmvcore to be installed (restart may be required)')
 
+    if (missing(data))
+        data <- jmvcore:::marshalData(
+            parent.frame(),
+            `if`( ! missing(deps), deps, NULL),
+            `if`( ! missing(group), group, NULL))
+
     options <- rttestISOptions$new(
         deps = deps,
         group = group,

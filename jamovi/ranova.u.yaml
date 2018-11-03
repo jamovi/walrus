@@ -1,7 +1,6 @@
 title: Robust ANOVA
 name: ranova
 jus: '2.0'
-stage: 0
 children:
   - type: VariableSupplier
     persistentItems: false
@@ -55,7 +54,6 @@ children:
             type: TextBox
             label: Trim proportion
             format: number
-            inputPattern: '[0-9]+'
             enable: '(method:trim)'
       - type: RadioButton
         name: method_boot
@@ -71,7 +69,6 @@ children:
             type: TextBox
             label: Samples
             format: number
-            inputPattern: '[0-9]+'
             enable: '(method:boot)'
           - name: dist
             type: ComboBox

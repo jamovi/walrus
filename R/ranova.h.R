@@ -300,6 +300,12 @@ ranova <- function(
     if ( ! requireNamespace('jmvcore'))
         stop('ranova requires jmvcore to be installed (restart may be required)')
 
+    if (missing(data))
+        data <- jmvcore:::marshalData(
+            parent.frame(),
+            `if`( ! missing(dep), dep, NULL),
+            `if`( ! missing(factors), factors, NULL))
+
     options <- ranovaOptions$new(
         dep = dep,
         factors = factors,

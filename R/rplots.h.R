@@ -177,6 +177,12 @@ rplots <- function(
     if ( ! requireNamespace('jmvcore'))
         stop('rplots requires jmvcore to be installed (restart may be required)')
 
+    if (missing(data))
+        data <- jmvcore:::marshalData(
+            parent.frame(),
+            `if`( ! missing(vars), vars, NULL),
+            `if`( ! missing(splitBy), splitBy, NULL))
+
     options <- rplotsOptions$new(
         vars = vars,
         splitBy = splitBy,

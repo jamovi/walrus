@@ -312,6 +312,12 @@ rdesc <- function(
     if ( ! requireNamespace('jmvcore'))
         stop('rdesc requires jmvcore to be installed (restart may be required)')
 
+    if (missing(data))
+        data <- jmvcore:::marshalData(
+            parent.frame(),
+            `if`( ! missing(vars), vars, NULL),
+            `if`( ! missing(splitBy), splitBy, NULL))
+
     options <- rdescOptions$new(
         vars = vars,
         splitBy = splitBy,

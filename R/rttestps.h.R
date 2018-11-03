@@ -202,6 +202,10 @@ rttestPS <- function(
     if ( ! requireNamespace('jmvcore'))
         stop('rttestPS requires jmvcore to be installed (restart may be required)')
 
+    if (missing(data))
+        data <- jmvcore:::marshalData(
+            parent.frame())
+
     options <- rttestPSOptions$new(
         pairs = pairs,
         tr = tr,

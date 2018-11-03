@@ -1,7 +1,6 @@
 title: Robust Independent Samples T-Test
 name: rttestIS
 jus: '2.0'
-stage: 0
 children:
   - type: VariableSupplier
     persistentItems: false
@@ -48,7 +47,6 @@ children:
             type: TextBox
             label: Trim proportion
             format: number
-            inputPattern: '[0-9]+'
           - type: CheckBox
             name: yuenbt
             label: Bootstrap
@@ -57,7 +55,6 @@ children:
                 name: nboot
                 label: Samples
                 format: number
-                inputPattern: '[0-9]+'
           - name: md
             type: CheckBox
             label: Mean difference

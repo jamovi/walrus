@@ -39,7 +39,6 @@ children:
         type: TextBox
         label: Trim proportion
         format: number
-        inputPattern: '[0-9]+'
       - name: md
         type: CheckBox
         label: Mean difference

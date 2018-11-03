@@ -1,7 +1,7 @@
 title: Robust Descriptives
 name: rdesc
 jus: '2.0'
-stage: 0
+compilerMode: tame
 children:
   - type: VariableSupplier
     persistentItems: false
@@ -49,7 +49,6 @@ children:
                     type: TextBox
                     label: Trim proportion
                     format: number
-                    inputPattern: '[0-9]+'
               - name: med
                 type: CheckBox
                 label: Median
@@ -63,7 +62,6 @@ children:
                         type: TextBox
                         label: Winsorizing level
                         format: number
-                        inputPattern: '[0-9]+'
                   - name: mest
                     type: CheckBox
                     label: M-estimator
@@ -72,5 +70,3 @@ children:
                         type: TextBox
                         label: Bending constant
                         format: number
-                        inputPattern: '[0-9]+'
-compilerMode: tame
