@@ -1,7 +1,8 @@
 Package: walrus
 Type: Package
 Title: Robust Statistical Methods
-Version: 1.0.3
+Version: 1.0.4
+Date: 2022-03-09
 Author: Jonathon Love, Patrick Mair
 Maintainer: Jonathon Love <jon@thon.cc>
 Description: A toolbox of common robust statistical tests, including robust
@@ -13,7 +14,7 @@ Description: A toolbox of common robust statistical tests, including robust
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: WRS2, ggplot2, jmvcore (>= 0.9.4), R6
+Imports: WRS2, ggplot2, jmvcore (>= 2.2), R6
 Suggests: MASS
 RoxygenNote: 6.0.1
 URL: https://github.com/jamovi/walrus
