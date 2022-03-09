@@ -50,5 +50,7 @@ analyses:
     menuTitle: Robust ANOVA
     description: Robust Analysis of Variance
     menuSubgroup: ANOVAs
+usesNative: true
+minApp: 1.0.8
 
 ...

@@ -1,0 +1,23 @@
+---
+refs:
+    w:
+        authors: 'Love, J., & Mair, P.'
+        year: 2017
+        title: 'Walrus: Robust Statistical Methods'
+        publisher: '[jamovi module]'
+        url: https://github.com/jamovi/walrus/
+
+    wrs2:
+        authors: 'Mair, P., & Wilcox, R.'
+        year: 2017
+        title: 'WRS2: A Collection of Robust Statistical Methods'
+        publisher: '[R package]. Retrieved from https://cran.r-project.org/package=WRS2'
+        url: https://cran.r-project.org/package=WRS2
+
+    wilcox:
+        authors: Wilcox, R. R.
+        year: 2011
+        title: Introduction to robust estimation and hypothesis testing
+        publisher: Academic press
+        url: https://www.amazon.com/Introduction-Estimation-Hypothesis-Statistical-Modeling/dp/012804733X
+...
