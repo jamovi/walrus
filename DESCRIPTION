@@ -1,8 +1,8 @@
 Package: walrus
 Type: Package
 Title: Robust Statistical Methods
-Version: 1.0.4
-Date: 2022-03-09
+Version: 1.0.5
+Date: 2022-09-07
 Author: Jonathon Love, Patrick Mair
 Maintainer: Jonathon Love <jon@thon.cc>
 Description: A toolbox of common robust statistical tests, including robust
