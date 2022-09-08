@@ -4,9 +4,21 @@
 \alias{rttestIS}
 \title{Robust Independent Samples T-Test}
 \usage{
-rttestIS(data, deps, group, yuen = TRUE, tr = 0.2, mest = FALSE,
-  method = "mom", yuenbt = FALSE, nboot = 599, md = FALSE, ci = FALSE,
-  es = FALSE, esci = FALSE)
+rttestIS(
+  data,
+  deps,
+  group,
+  yuen = TRUE,
+  tr = 0.2,
+  mest = FALSE,
+  method = "mom",
+  yuenbt = FALSE,
+  nboot = 599,
+  md = FALSE,
+  ci = FALSE,
+  es = FALSE,
+  esci = FALSE
+)
 }
 \arguments{
 \item{data}{the data as a data frame}

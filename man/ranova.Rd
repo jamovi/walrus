@@ -4,8 +4,17 @@
 \alias{ranova}
 \title{Robust ANOVA}
 \usage{
-ranova(data, dep, factors = NULL, method = "trim", ph = FALSE, tr = 0.2,
-  est = "mom", nboot = 599, dist = "proj")
+ranova(
+  data,
+  dep,
+  factors = NULL,
+  method = "trim",
+  ph = FALSE,
+  tr = 0.2,
+  est = "mom",
+  nboot = 599,
+  dist = "proj"
+)
 }
 \arguments{
 \item{data}{the data as a data frame}

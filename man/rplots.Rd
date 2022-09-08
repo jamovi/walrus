@@ -4,8 +4,15 @@
 \alias{rplots}
 \title{Box & Violin Plots}
 \usage{
-rplots(data, vars, splitBy = NULL, violin = TRUE, boxplot = FALSE,
-  dot = TRUE, dotType = "stack")
+rplots(
+  data,
+  vars,
+  splitBy = NULL,
+  violin = TRUE,
+  boxplot = FALSE,
+  dot = TRUE,
+  dotType = "stack"
+)
 }
 \arguments{
 \item{data}{the data as a data frame}

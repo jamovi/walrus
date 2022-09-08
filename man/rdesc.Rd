@@ -4,8 +4,19 @@
 \alias{rdesc}
 \title{Robust Descriptives}
 \usage{
-rdesc(data, vars, splitBy = NULL, mean = TRUE, trim = TRUE, tr = 0.2,
-  win = FALSE, wl = 0.2, mest = FALSE, bend = 1.28, med = FALSE)
+rdesc(
+  data,
+  vars,
+  splitBy = NULL,
+  mean = TRUE,
+  trim = TRUE,
+  tr = 0.2,
+  win = FALSE,
+  wl = 0.2,
+  mest = FALSE,
+  bend = 1.28,
+  med = FALSE
+)
 }
 \arguments{
 \item{data}{the data as a data frame}
