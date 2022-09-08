@@ -33,7 +33,7 @@ NULL
 #'
 #' }
 #'
-#' \if{html}{\figure{walrus.svg}{options: width=72px style="padding-left: 50px"}}
+#' \if{html}{\figure{walrus.svg}{options: width=72 style="padding-left: 50px"}}
 #' \if{latex}{\figure{walrus.pdf}{options: width=1in}}
 #'
 "_PACKAGE"
