@@ -9,11 +9,11 @@ ranovaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             dep = NULL,
             factors = NULL,
             method = "trim",
-            ph = FALSE,
             tr = 0.2,
             est = "mom",
             nboot = 599,
-            dist = "proj", ...) {
+            dist = "proj",
+            ph = FALSE, ...) {
 
             super$initialize(
                 package="walrus",
@@ -45,10 +45,6 @@ ranovaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "trim",
                     "boot"),
                 default="trim")
-            private$..ph <- jmvcore::OptionBool$new(
-                "ph",
-                ph,
-                default=FALSE)
             private$..tr <- jmvcore::OptionNumber$new(
                 "tr",
                 tr,
@@ -75,34 +71,38 @@ ranovaOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "maha",
                     "proj"),
                 default="proj")
+            private$..ph <- jmvcore::OptionBool$new(
+                "ph",
+                ph,
+                default=FALSE)
 
             self$.addOption(private$..dep)
             self$.addOption(private$..factors)
             self$.addOption(private$..method)
-            self$.addOption(private$..ph)
             self$.addOption(private$..tr)
             self$.addOption(private$..est)
             self$.addOption(private$..nboot)
             self$.addOption(private$..dist)
+            self$.addOption(private$..ph)
         }),
     active = list(
         dep = function() private$..dep$value,
         factors = function() private$..factors$value,
         method = function() private$..method$value,
-        ph = function() private$..ph$value,
         tr = function() private$..tr$value,
         est = function() private$..est$value,
         nboot = function() private$..nboot$value,
-        dist = function() private$..dist$value),
+        dist = function() private$..dist$value,
+        ph = function() private$..ph$value),
     private = list(
         ..dep = NA,
         ..factors = NA,
         ..method = NA,
-        ..ph = NA,
         ..tr = NA,
         ..est = NA,
         ..nboot = NA,
-        ..dist = NA)
+        ..dist = NA,
+        ..ph = NA)
 )
 
 ranovaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
@@ -132,28 +132,65 @@ ranovaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     "dist"),
                 columns=list(
                     list(
-                        `name`="name", 
-                        `title`="", 
+                        `name`="name",
+                        `title`="",
                         `type`="text"),
                     list(
-                        `name`="s", 
-                        `title`="F", 
+                        `name`="s",
+                        `title`="F",
                         `type`="number"),
                     list(
-                        `name`="p", 
-                        `title`="p", 
-                        `type`="number", 
-                        `format`="zto,pvalue"))))
+                        `name`="critval",
+                        `title`="Critical value",
+                        `type`="number",
+                        `visible`=FALSE),
+                    list(
+                        `name`="df1",
+                        `title`="df1",
+                        `type`="number",
+                        `visible`=FALSE),
+                    list(
+                        `name`="df2",
+                        `title`="df2",
+                        `type`="number",
+                        `visible`=FALSE),
+                    list(
+                        `name`="p",
+                        `title`="p",
+                        `type`="number",
+                        `format`="zto,pvalue"),
+                    list(
+                        `name`="expvar",
+                        `title`="Variance explained",
+                        `type`="number",
+                        `visible`=FALSE),
+                    list(
+                        `name`="es",
+                        `title`="ES",
+                        `type`="number",
+                        `visible`=FALSE),
+                    list(
+                        `name`="escil",
+                        `title`="Lower",
+                        `superTitle`="Bootstrap CI",
+                        `type`="number",
+                        `visible`=FALSE),
+                    list(
+                        `name`="esciu",
+                        `title`="Upper",
+                        `superTitle`="Bootstrap CI",
+                        `type`="number",
+                        `visible`=FALSE))))
             self$add(jmvcore::Array$new(
                 options=options,
                 name="phs",
                 title="Post Hoc Tests",
-                items="(factors)",
-                visible="(ph)",
+                items=7,
                 template=jmvcore::Table$new(
                     options=options,
                     name="ph",
-                    title="Post Hoc Tests - $key",
+                    title="",
+                    visible=FALSE,
                     clearWith=list(
                         "dep",
                         "factors",
@@ -164,31 +201,38 @@ ranovaResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                         "dist"),
                     columns=list(
                         list(
-                            `name`="v1", 
-                            `title`="", 
+                            `name`="v1",
+                            `title`="",
+                            `type`="text",
+                            `combineBelow`=TRUE),
+                        list(
+                            `name`="v2",
+                            `title`="",
                             `type`="text"),
                         list(
-                            `name`="v2", 
-                            `title`="", 
-                            `type`="text"),
-                        list(
-                            `name`="psi", 
-                            `title`="psi-hat", 
+                            `name`="psi",
+                            `title`="psi-hat",
                             `type`="number"),
                         list(
-                            `name`="p", 
-                            `title`="p", 
-                            `type`="number", 
+                            `name`="p",
+                            `title`="p",
+                            `type`="number",
                             `format`="zto,pvalue"),
                         list(
-                            `name`="cil", 
-                            `title`="Lower", 
-                            `superTitle`="95% Confidence interval", 
+                            `name`="adjp",
+                            `title`="adj.p",
+                            `type`="number",
+                            `format`="zto,pvalue",
+                            `visible`=FALSE),
+                        list(
+                            `name`="cil",
+                            `title`="Lower",
+                            `superTitle`="95% Confidence interval",
                             `type`="number"),
                         list(
-                            `name`="ciu", 
-                            `title`="Upper", 
-                            `superTitle`="95% Confidence interval", 
+                            `name`="ciu",
+                            `title`="Upper",
+                            `superTitle`="95% Confidence interval",
                             `type`="number")))))}))
 
 ranovaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
@@ -263,9 +307,8 @@ ranovaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   variable must be numeric
 #' @param factors a vector of strings naming the fixed factors from
 #'   \code{data}
-#' @param method \code{'median'}, \code{'trim'} (default) or \code{'boot'};
+#' @param method \code{'median'}, (default) \code{'trim'} or \code{'boot'};
 #'   the method to use, median, trimmed means, or bootstrapped
-#' @param ph \code{TRUE} or \code{FALSE} (default), provide post hoc tests
 #' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of
 #'   measurements to trim from each end, when using the trim and bootstrap
 #'   methods
@@ -275,6 +318,7 @@ ranovaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   samples to use when using the bootstrap method
 #' @param dist \code{'maha'} or \code{'proj'} (default), whether to use
 #'   Mahalanobis or Projection distances respectively
+#' @param ph \code{TRUE} or \code{FALSE} (default), provide post hoc tests
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$main} \tab \tab \tab \tab \tab the table of ANOVA results \cr
@@ -293,11 +337,11 @@ ranova <- function(
     dep,
     factors = NULL,
     method = "trim",
-    ph = FALSE,
     tr = 0.2,
     est = "mom",
     nboot = 599,
-    dist = "proj") {
+    dist = "proj",
+    ph = FALSE) {
 
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("ranova requires jmvcore to be installed (restart may be required)")
@@ -316,11 +360,11 @@ ranova <- function(
         dep = dep,
         factors = factors,
         method = method,
-        ph = ph,
         tr = tr,
         est = est,
         nboot = nboot,
-        dist = dist)
+        dist = dist,
+        ph = ph)
 
     analysis <- ranovaClass$new(
         options = options,

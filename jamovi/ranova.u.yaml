@@ -1,6 +1,8 @@
 title: Robust ANOVA
 name: ranova
 jus: '2.0'
+stage: 0
+compilerMode: tame
 children:
   - type: VariableSupplier
     persistentItems: false
@@ -26,6 +28,7 @@ children:
         children:
           - type: VariablesListBox
             name: factors
+            maxItemCount: 3
             showColumnHeaders: false
             fullRowSelect: true
             columns:

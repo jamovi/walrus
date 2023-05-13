@@ -92,20 +92,11 @@ options:
         - median
         - trim
         - boot
-      default:
-          trim
+      default: trim
       description:
           R: >
-            `'median'`, `'trim'` (default) or `'boot'`; the method to use,
+            `'median'`, (default) `'trim'` or `'boot'`; the method to use,
             median, trimmed means, or bootstrapped
-
-    - name: ph
-      title: Post hoc tests
-      type: Bool
-      default: false
-      description:
-          R: >
-            `TRUE` or `FALSE` (default), provide post hoc tests
 
     - name: tr
       title: Trim proportion
@@ -158,3 +149,11 @@ options:
           R: >
             `'maha'` or `'proj'` (default), whether to use Mahalanobis or
             Projection distances respectively
+
+    - name: ph
+      title: Post hoc tests
+      type: Bool
+      default: false
+      description:
+          R: >
+            `TRUE` or `FALSE` (default), provide post hoc tests
