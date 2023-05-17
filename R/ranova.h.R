@@ -307,7 +307,7 @@ ranovaBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   variable must be numeric
 #' @param factors a vector of strings naming the fixed factors from
 #'   \code{data}
-#' @param method \code{'median'}, (default) \code{'trim'} or \code{'boot'};
+#' @param method \code{'median'}, \code{'trim'} (default) or \code{'boot'};
 #'   the method to use, median, trimmed means, or bootstrapped
 #' @param tr a number between 0 and 0.5, (default: 0.2), the proportion of
 #'   measurements to trim from each end, when using the trim and bootstrap

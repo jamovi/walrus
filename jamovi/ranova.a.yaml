@@ -95,7 +95,7 @@ options:
       default: trim
       description:
           R: >
-            `'median'`, (default) `'trim'` or `'boot'`; the method to use,
+            `'median'`, `'trim'` (default) or `'boot'`; the method to use,
             median, trimmed means, or bootstrapped
 
     - name: tr
