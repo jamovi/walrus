@@ -20,6 +20,7 @@ rttestISClass <- R6::R6Class(
 
             for (dep in ttestTable$rowKeys)
                 ttestTable$addFootnote(rowKey=dep, col='test[mest]', paste(method, 'estimator used'))
+
         },
         .run = function() {
 
@@ -30,13 +31,17 @@ rttestISClass <- R6::R6Class(
             if (is.null(group) || length(deps) == 0)
                 return()
 
-            trim <- self$options$tr
-
             data <- self$data
+            trim <- self$options$tr
+            ttestTable <- self$results$ttest
+
+            groupLevels <- base::levels(data[[group]])
+            if (length(groupLevels) != 2)
+                jmvcore::reject(.("Grouping variable '{a}' must have exactly 2 levels"),
+                                code="grouping_var_must_have_2_levels", a=group)
+
             for (dep in deps)
                 data[[dep]] <- jmvcore::toNumeric(data[[dep]])
-
-            ttestTable <- self$results$ttest
 
             for (dep in deps) {
                 fmla <- jmvcore::constructFormula(dep, group)
